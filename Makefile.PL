@@ -28,7 +28,7 @@ my %WriteMakefileArgs = (
                                            },
                        'ABSTRACT' => 'Clean Unit Testing with Moose',
                        'EXE_FILES' => [],
-                       'VERSION' => '0.05.1',
+                       'VERSION' => '0.0501',
                        'PREREQ_PM' => {
                                         'Scalar::Util' => '1.21',
                                         'MooseX::Declare' => '0.31',

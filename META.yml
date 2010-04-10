@@ -20,49 +20,49 @@ name: Test-Mini
 provides:
   Test::Mini::Unit:
     file: lib/Test/Mini/Unit.pm
-    version: 0.05.1
+    version: 0.0501
   Test::Mini::Unit::Assertions:
     file: lib/Test/Mini/Unit/Assertions.pm
-    version: 0.05.1
+    version: 0.0501
   Test::Mini::Unit::Logger::Base:
     file: lib/Test/Mini/Unit/Logger/Base.pm
-    version: 0.05.1
+    version: 0.0501
   Test::Mini::Unit::Logger::Lapidary:
     file: lib/Test/Mini/Unit/Logger/Lapidary.pm
-    version: 0.05.1
+    version: 0.0501
   Test::Mini::Unit::Logger::Roles::Statistics:
     file: lib/Test/Mini/Unit/Logger/Roles/Statistics.pm
-    version: 0.05.1
+    version: 0.0501
   Test::Mini::Unit::Logger::Roles::Timings:
     file: lib/Test/Mini/Unit/Logger/Roles/Timings.pm
-    version: 0.05.1
+    version: 0.0501
   Test::Mini::Unit::Logger::Roles::Timings::SpecificTest:
     file: lib/Test/Mini/Unit/Logger/Roles/Timings/SpecificTest.pm
-    version: 0.05.1
+    version: 0.0501
   Test::Mini::Unit::Logger::Roles::Timings::TestCase:
     file: lib/Test/Mini/Unit/Logger/Roles/Timings/TestCase.pm
-    version: 0.05.1
+    version: 0.0501
   Test::Mini::Unit::Logger::Roles::Timings::TestSuite:
     file: lib/Test/Mini/Unit/Logger/Roles/Timings/TestSuite.pm
-    version: 0.05.1
+    version: 0.0501
   Test::Mini::Unit::Logger::TAP:
     file: lib/Test/Mini/Unit/Logger/TAP.pm
-    version: 0.05.1
+    version: 0.0501
   Test::Mini::Unit::Runner:
     file: lib/Test/Mini/Unit/Runner.pm
-    version: 0.05.1
+    version: 0.0501
   Test::Mini::Unit::Syntax::Keyword::Advice:
     file: lib/Test/Mini/Unit/Syntax/Keyword/Advice.pm
-    version: 0.05.1
+    version: 0.0501
   Test::Mini::Unit::Syntax::Keyword::Test:
     file: lib/Test/Mini/Unit/Syntax/Keyword/Test.pm
-    version: 0.05.1
+    version: 0.0501
   Test::Mini::Unit::Syntax::Keyword::TestCase:
     file: lib/Test/Mini/Unit/Syntax/Keyword/TestCase.pm
-    version: 0.05.1
+    version: 0.0501
   Test::Mini::Unit::TestCase:
     file: lib/Test/Mini/Unit/TestCase.pm
-    version: 0.05.1
+    version: 0.0501
 recommends: {}
 requires:
   B::Hooks::OP::Check: 0.18
@@ -87,4 +87,4 @@ requires:
 resources:
   homepage: http://github.com/pvande/Test-Mini
   repository: git://github.com/pvande/Test-Mini.git
-version: 0.05.1
+version: 0.0501
