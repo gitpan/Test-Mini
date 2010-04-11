@@ -42,7 +42,7 @@ Test::Mini::Unit - Clean Unit Testing with Moose
 
 =head1 VERSION
 
-version 0.0501
+version 0.050200
 
 =head1 SYNOPSIS
 
