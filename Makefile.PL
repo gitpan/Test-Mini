@@ -10,44 +10,43 @@ use ExtUtils::MakeMaker 6.31;
 
 my %WriteMakefileArgs = (
                        'test' => {
-                                   'TESTS' => 't/*.t t/Demonstrations/*.t t/Test/Mini/Unit/*.t t/Test/Mini/Unit/Logger/*.t t/Test/Mini/Unit/Logger/Roles/*.t t/Test/Mini/Unit/Logger/Roles/Timings/*.t'
+                                   'TESTS' => 't/*.t t/Demonstrations/*.t t/Test/Mini/*.t t/Test/Mini/Logger/*.t t/Test/Mini/Unit/Sugar/*.t'
                                  },
                        'NAME' => 'Test::Mini',
                        'DISTNAME' => 'Test-Mini',
                        'CONFIGURE_REQUIRES' => {
                                                  'ExtUtils::MakeMaker' => '6.31'
                                                },
-                       'AUTHOR' => 'Pieter Vande Bruggen <pvande@cpan.org>',
+                       'AUTHOR' => 'Pieter van de Bruggen <pvande@cpan.org>',
                        'BUILD_REQUIRES' => {
                                              'Test::More' => '0',
                                              'File::Find' => '0',
                                              'File::Temp' => '0',
+                                             'Mock::Collection' => '0',
                                              'Text::Outdent' => '0.01',
-                                             'B' => '0',
-                                             'Moose' => '0'
+                                             'B' => '0'
                                            },
-                       'ABSTRACT' => 'Clean Unit Testing with Moose',
+                       'ABSTRACT' => 'Clean Unit Testing',
                        'EXE_FILES' => [],
-                       'VERSION' => '0.050200',
+                       'VERSION' => '0.06',
                        'PREREQ_PM' => {
                                         'Scalar::Util' => '1.21',
-                                        'MooseX::Declare' => '0.31',
                                         'IO::Scalar' => '2.110',
+                                        'Class::MOP' => '1.00',
                                         'aliased' => '0',
-                                        'MooseX::Getopt' => '0.22',
                                         'List::Util' => '1.21',
-                                        'MooseX::Method::Signatures' => '0.30',
                                         'List::MoreUtils' => '0',
-                                        'Moose' => '0.98',
-                                        'Data::Dumper' => '0',
+                                        'Try::Tiny' => '0.04',
+                                        'Getopt::Long' => '0',
+                                        'Sub::Name' => '0',
+                                        'B::Hooks::EndOfScope' => '0',
                                         'Exception::Class' => '1.29',
                                         'B::Hooks::OP::Check' => '0.18',
-                                        'TryCatch' => '1.002000',
-                                        'MooseX::Attribute::ENV' => '0',
-                                        'Sub::Install' => '0',
                                         'Data::Inspect' => '0.03',
+                                        'Sub::Install' => '0',
                                         'Text::Outdent' => '0.01',
-                                        'Devel::Declare' => '0.005011'
+                                        'Devel::Declare' => '0.006',
+                                        'Devel::Declare::Context::Simple' => '0'
                                       },
                        'LICENSE' => 'perl'
                      );

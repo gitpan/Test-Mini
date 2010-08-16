@@ -1,8 +1,5 @@
 NAME
-    Test::Mini::Unit - Clean Unit Testing with Moose
-
-VERSION
-    version 0.050200
+    Test::Mini - Clean Unit Testing
 
 SYNOPSIS
     Real Documentation is coming. In the meantime, enjoy the montage!
@@ -10,8 +7,8 @@ SYNOPSIS
   Traditional Style
       package TraditionalTest;
 
-      use Test::Mini::Unit;
-      use Test::Mini::Unit::Assertions;
+      use Test::Mini 'sugarfree';
+      use Test::Mini::Assertions;
 
       sub setup    { 'This runs before each test...' }
       sub teardown { 'This runs after each test...' }
@@ -22,26 +19,10 @@ SYNOPSIS
 
       1;
 
-  Classical Style
-      use Test::Mini::Unit;
-
-      class ClassicalTest extends Test::Mini::Unit::TestCase
-      {
-        use Test::Mini::Unit::Assertions;
-
-        method setup()    { 'This runs before each test...' }
-        method teardown() { 'This runs after each test...' }
-
-        method test_assert() { assert 1, 'I should pass' }
-        method test_refute() { refute 0, 'I should fail' }
-        method test_skip()   { skip "I've got better things to do" }
-      }
-
   Sweetened Style
-      use Test::Mini::Unit;
+      use Test::Mini;
 
-      testcase SugaryTest
-      {
+      testcase SugaryTest {
         setup    { 'This runs before each test...' }
         teardown { 'This runs after each test...' }
 
@@ -51,10 +32,10 @@ SYNOPSIS
       }
 
 AUTHOR
-    Pieter Vande Bruggen, <pvande@cpan.org<gt>
+    Pieter van de Bruggen, <pvande@cpan.org<gt>
 
 COPYRIGHT AND LICENSE
-    Copyright (C) 2010 by Pieter Vande Bruggen
+    Copyright (C) 2010 by Pieter van de Bruggen
 
     This library is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself, either Perl version 5.8.9 or, at
