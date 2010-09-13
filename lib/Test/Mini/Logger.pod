@@ -10,3 +10,526 @@ Whether you're using a tool that expects output in a certain format, or
 you just long for the familiar look and feel of another testing
 framework, this is what you're looking for.
 
+=head1 METHODS
+
+=head2 Attribute Accessors
+
+=over
+
+=item B<<<< buffer >>>>
+
+    - buffer($self) # => IO 
+
+
+Output buffer.
+
+
+
+
+Returns:
+
+=over
+
+(I<<<< IO >>>>) - Output buffer.
+
+
+=back
+
+=item B<<<< verbose >>>>
+
+    - verbose($self) # => Object 
+
+
+Logger verbosity.
+
+
+
+
+Returns:
+
+=over
+
+Logger verbosity.
+
+
+=back
+
+=back
+
+=head2 Output Functions
+
+=over
+
+=item B<<<< print >>>>
+
+    - print($self, @msg) # => Object 
+
+
+Write output to the L<<<< S<<<<< #buffer >>>>> | / buffer >>>>. Lines
+will be output without added newlines.
+
+
+
+Parameters:
+
+=over
+
+C<<<< @msg >>>> - The message(s) to be printed; will be handled as
+per C<<<< print >>>>.
+
+
+=back
+
+=item B<<<< say >>>>
+
+    - say($self, @msg) # => Object 
+
+
+Write output to the L<<<< S<<<<< #buffer >>>>> | / buffer >>>>. Lines
+will be output with appended newlines.
+
+
+
+Parameters:
+
+=over
+
+C<<<< @msg >>>> - The message(s) to be printed; newlines will be
+appended to each message, before being passed to L<<<< S<<<<< #print
+>>>>> | / print >>>>.
+
+
+=back
+
+=back
+
+=head2 Callbacks
+
+=over
+
+=item B<<<< begin_test >>>>
+
+    - begin_test($self, $tc, $test) # => Object 
+
+
+Called before each test is run.
+
+
+
+Parameters:
+
+=over
+
+C<<<< $tc >>>> (I<<<< Class >>>>) - The test case owning the test
+method.
+
+
+C<<<< $test >>>> (I<<<< String >>>>) - The name of the test method
+being run.
+
+
+=back
+
+=item B<<<< begin_test_case >>>>
+
+    - begin_test_case($self, $tc, @tests) # => Object 
+
+
+Called before each test case is run.
+
+
+
+Parameters:
+
+=over
+
+C<<<< $tc >>>> (I<<<< Class >>>>) - The test case being run.
+
+
+C<<<< @tests >>>> (I<<<< Array<String> >>>>) - A list of tests to be
+run.
+
+
+=back
+
+=item B<<<< begin_test_suite >>>>
+
+    - begin_test_suite($self, %args) # => Object 
+
+
+Called before the test suite is run.
+
+
+
+Parameters:
+
+=over
+
+C<<<< %args >>>> (I<<<< Hash >>>>) - Options the test suite was run
+with.
+
+
+=back
+
+
+
+
+
+
+
+Valid Options for C<%args>:
+
+=over
+
+filter (I<<<< String >>>>) - Test name filter.
+
+
+seed (I<<<< String >>>>) - Randomness seed.
+
+
+=back
+
+=item B<<<< error >>>>
+
+    - error($self, $tc, $test, $e) # => Object 
+
+
+Called when a test dies with an error. Increments the error count.
+
+
+
+Parameters:
+
+=over
+
+C<<<< $tc >>>> (I<<<< Class >>>>) - The test case owning the test
+method.
+
+
+C<<<< $test >>>> (I<<<< String >>>>) - The name of the test with an
+error.
+
+
+C<<<< $e >>>> (I<<<< Test::Mini::Exception >>>>) - The exception
+object.
+
+
+=back
+
+=item B<<<< fail >>>>
+
+    - fail($self, $tc, $test, $e) # => Object 
+
+
+Called when a test fails. Increments the failure count.
+
+
+
+Parameters:
+
+=over
+
+C<<<< $tc >>>> (I<<<< Class >>>>) - The test case owning the test
+method.
+
+
+C<<<< $test >>>> (I<<<< String >>>>) - The name of the failed test.
+
+
+C<<<< $e >>>> (I<<<< Test::Mini::Exception::Assert >>>>) - The
+exception object.
+
+
+=back
+
+=item B<<<< finish_test >>>>
+
+    - finish_test($self, $tc, $test, $assertions) # => Object 
+
+
+Called after each test is run. Increments the test and assertion counts,
+and finalizes the test's timing.
+
+
+
+Parameters:
+
+=over
+
+C<<<< $tc >>>> (I<<<< Class >>>>) - The test case owning the test
+method.
+
+
+C<<<< $test >>>> (I<<<< String >>>>) - The name of the test method
+just run.
+
+
+C<<<< $assertions >>>> (I<<<< Integer >>>>) - The number of
+assertions called.
+
+
+=back
+
+=item B<<<< finish_test_case >>>>
+
+    - finish_test_case($self, $tc, @tests) # => Object 
+
+
+Called after each test case is run. Increments the test case count, and
+finalizes the test case's timing.
+
+
+
+Parameters:
+
+=over
+
+C<<<< $tc >>>> (I<<<< Class >>>>) - The test case just run.
+
+
+C<<<< @tests >>>> (I<<<< Array<String> >>>>) - A list of tests run.
+
+
+=back
+
+=item B<<<< finish_test_suite >>>>
+
+    - finish_test_suite($self, $exit_code) # => Object 
+
+
+Called after each test suite is run. Finalizes the test suite timing.
+
+
+
+Parameters:
+
+=over
+
+C<<<< $exit_code >>>> (I<<<< Integer >>>>) - Status the tests
+finished with.
+
+
+=back
+
+=item B<<<< pass >>>>
+
+    - pass($self, $tc, $test) # => Object 
+
+
+Called when a test passes. Increments the pass count.
+
+
+
+Parameters:
+
+=over
+
+C<<<< $tc >>>> (I<<<< Class >>>>) - The test case owning the test
+method.
+
+
+C<<<< $test >>>> (I<<<< String >>>>) - The name of the passing test.
+
+
+=back
+
+=item B<<<< skip >>>>
+
+    - skip($self, $tc, $test, $e) # => Object 
+
+
+Called when a test is skipped. Increments the skip count.
+
+
+
+Parameters:
+
+=over
+
+C<<<< $tc >>>> (I<<<< Class >>>>) - The test case owning the test
+method.
+
+
+C<<<< $test >>>> (I<<<< String >>>>) - The name of the skipped test.
+
+
+C<<<< $e >>>> (I<<<< Test::Mini::Exception::Skip >>>>) - The
+exception object.
+
+
+=back
+
+=back
+
+=head2 Statistics
+
+=over
+
+=item B<<<< count >>>>
+
+    - count # => Hash
+    - count($key) # => Number
+
+
+Accessor for counters.
+
+
+
+Overloads:
+
+
+    - count # => Hash 
+
+=over
+
+
+The count hash.
+
+
+
+
+Returns:
+
+=over
+
+(I<<<< Hash >>>>) - The count hash.
+
+
+=back
+
+
+
+
+=back
+
+    - count($key) # => Number 
+
+=over
+
+
+The value for the given key.
+
+
+
+Parameters:
+
+=over
+
+C<<<< $key >>>> - A key in the count hash.
+
+
+=back
+
+
+Returns:
+
+=over
+
+(I<<<< Number >>>>) - The value for the given key.
+
+
+=back
+
+
+
+
+=back
+
+=item B<<<< time >>>>
+
+    - time($self, $key) # => Number 
+
+
+Accessor for the timing data.
+
+
+
+Parameters:
+
+=over
+
+C<<<< $key >>>> - The key to look up timings for.  Typical values
+are:
+
+
+=over
+
+=item C<<<< $self >>>> 
+
+Time for test suite
+
+
+=item "TestCase" 
+
+Time for the test case
+
+
+=item "TestCase#test" 
+
+Time for the given test
+
+
+=back
+
+Times for units that have not finished should not be relied upon.
+
+
+=back
+
+
+Returns:
+
+=over
+
+(I<<<< Number >>>>) - The time taken by the given argument, in
+seconds.
+
+
+=back
+
+=back
+
+=head2 Class Methods
+
+=over
+
+=item B<<<< new >>>>
+
+    + new($class, %args) # => Object 
+
+
+Constructor.
+
+
+
+Parameters:
+
+=over
+
+C<<<< %args >>>> (I<<<< Hash >>>>) - Initial state for the new
+instance.
+
+
+=back
+
+
+
+
+
+
+
+Valid Options for C<%args>:
+
+=over
+
+verbose - Logger verbosity.  Defaults to C<<<<< 0 >>>>>.
+
+
+buffer (I<<<< IO >>>>) - Output buffer.  Defaults to C<<<<< STDOUT
+>>>>>.
+
+
+=back
+
+=back
+

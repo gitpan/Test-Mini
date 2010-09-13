@@ -58,6 +58,33 @@ L<<<< S<<<<< Test::Mini::Runner >>>>> | Test::Mini::Runner >>>>
 
 =back
 
+=head1 METHODS
+
+=head2 Class Methods
+
+=over
+
+=item B<<<< runner_class >>>>
+
+    + runner_class # => Class 
+
+
+The test runner class to use.
+
+
+
+
+Returns:
+
+=over
+
+(I<<<< Class >>>>) - The test runner class to use.
+
+
+=back
+
+=back
+
 =head1 AUTHOR
 
 Pieter van de Bruggen <pvande@cpan.org>

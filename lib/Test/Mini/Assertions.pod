@@ -4,3 +4,903 @@
 
 Test::Mini::Assertions - Basic Assertions for Test::Mini
 
+=head1 METHODS
+
+=head2 Exported Functions
+
+=over
+
+=item B<<<< assert >>>>
+
+    - assert($test, $msg) # => Object 
+
+
+Asserts that C<<<< $test >>>> is truthy, and throws a L<<<< S<<<<<
+Test::Mini::Exception::Assert >>>>> | Test::Mini::Exception::Assert >>>>
+if that assertion fails.
+
+
+Examples:
+
+    assert 1;
+    
+    assert 'true', 'Truth should shine clear';
+
+Parameters:
+
+=over
+
+C<<<< $test >>>> - The value to test.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< assert_block >>>>
+
+    - assert_block($block, $msg) # => Object 
+
+
+Asserts that the given code reference returns a truthy value.
+
+
+Examples:
+
+    assert_block { 'true' };
+    
+    assert_block \&some_sub, 'expected better from &some_sub';
+
+Parameters:
+
+=over
+
+C<<<< $block >>>> (I<<<< CODE >>>>) - The code reference to test.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< assert_can >>>>
+
+=item Aliased as: I<<<< assert_responds_to >>>>
+
+    - assert_can($obj, $method, $msg) # => Object 
+
+
+Verifies that the given C<<<< $obj >>>> is capable of responding to the
+given C<<<< $method >>>> name.
+
+
+Examples:
+
+    assert_can $date, 'day_of_week';
+    
+    assert_can $time, 'seconds', '$time cannot respond to #seconds';
+
+Parameters:
+
+=over
+
+C<<<< $obj >>>> - The object being tested.
+
+
+C<<<< $method >>>> (I<<<< String >>>>) - The method name being
+checked for.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< assert_contains >>>>
+
+=item Aliased as: I<<<< assert_includes >>>>
+
+    - assert_contains($collection, $obj, $msg) # => Object 
+
+
+Verifies that the given C<<<< $collection >>>> contains the given C<<<<
+$obj >>>> as a member.
+
+
+Examples:
+
+    assert_contains [qw/ 1 2 3 /], 2;
+    
+    assert_contains { a => 'b' }, 'a';  # 'b' also contained
+    
+    assert_contains 'expectorate', 'xp';
+    
+    assert_contains Collection->new(1, 2, 3), 2;  # if Collection->contains(2)
+
+Parameters:
+
+=over
+
+C<<<< $collection >>>> (I<<<< Array|Hash|String|#contains >>>>) -
+The collection to test.
+
+
+C<<<< $obj >>>> - The needle to find.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< assert_defined >>>>
+
+=item Aliased as: I<<<< refute_undef >>>>
+
+    - assert_defined($obj, $msg) # => Object 
+
+
+Validates that the given C<<<< $obj >>>> is defined.
+
+
+Examples:
+
+    assert_defined $value;  # if defined $value
+
+Parameters:
+
+=over
+
+C<<<< $obj >>>> - The value to check.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< assert_dies >>>>
+
+    - assert_dies($sub, $error, $msg) # => Object 
+
+
+Tests that the supplied code block dies, and fails if it succeeds.  If
+C<<<< $error >>>> is provided, the error message in C<<<< $@ >>>> must
+contain it.
+
+
+Examples:
+
+    assert_dies { die 'LAGHLAGHLAGHL' };
+    
+    assert_dies { die 'Failure on line 27 in Foo.pm' } 'line 27';
+
+Parameters:
+
+=over
+
+C<<<< $sub >>>> (I<<<< CODE >>>>) - The code that should die.
+
+
+C<<<< $error >>>> (I<<<< String >>>>) - ('') The error substring
+expected.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< assert_empty >>>>
+
+    - assert_empty($collection, $msg) # => Object 
+
+
+Verifies the emptiness of a collection.
+
+
+Examples:
+
+    assert_empty [];
+    
+    assert_empty {};
+    
+    assert_empty '';
+    
+    assert_empty Collection->new();  # if Collection->new()->is_empty()
+
+Parameters:
+
+=over
+
+C<<<< $collection >>>> (I<<<< Array|Hash|String|#is_empty >>>>) -
+The collection under scrutiny.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< assert_equal >>>>
+
+=item Aliased as: I<<<< assert_eq >>>>
+
+    - assert_equal($actual, $expected, $msg) # => Object 
+
+
+Checks two given arguments for equality.
+
+
+Examples:
+
+    assert_equal 3.000, 3;
+    
+    assert_equal lc('FOO'), 'foo';
+    
+    assert_equal [qw/ 1 2 3 /], [ 1, 2, 3 ];
+    
+    assert_equal { a => 'eh' }, { a => 'eh' };
+    
+    assert_equal Class->new(), $expected;  # if $expected->equals(Class->new())
+
+Parameters:
+
+=over
+
+C<<<< $actual >>>> - The value under test.
+
+
+C<<<< $expected >>>> - The expected value.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< assert_in_delta >>>>
+
+    - assert_in_delta($actual, $expected, $delta, $msg) # => Object 
+
+
+Checks that the difference between C<<<< $actual >>>> and C<<<<
+$expected >>>> is less than C<<<< $delta >>>>.
+
+
+Examples:
+
+    assert_in_delta 1.001, 1;
+    
+    assert_in_delta 104, 100, 5;
+
+Parameters:
+
+=over
+
+C<<<< $actual >>>> (I<<<< Number >>>>) - The tested value.
+
+
+C<<<< $expected >>>> (I<<<< Number >>>>) - The static value.
+
+
+C<<<< $delta >>>> (I<<<< Number >>>>) - (0.001) The expected delta.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< assert_in_epsilon >>>>
+
+    - assert_in_epsilon($actual, $expected, $epsilon, $msg) # => Object 
+
+
+Checks that the difference between C<<<< $actual >>>> and C<<<<
+$expected >>>> is less than a given fraction of the smaller of the two
+numbers.
+
+
+Examples:
+
+    assert_in_epsilon 22.0 / 7.0, Math::Trig::pi;
+    
+    assert_in_epsilon 220, 200, 0.10
+
+Parameters:
+
+=over
+
+C<<<< $actual >>>> (I<<<< Number >>>>) - The tested value.
+
+
+C<<<< $expected >>>> (I<<<< Number >>>>) - The static value.
+
+
+C<<<< $epsilon >>>> (I<<<< Number >>>>) - (0.001) The expected
+tolerance factor.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< assert_instance_of >>>>
+
+    - assert_instance_of($obj, $type, $msg) # => Object 
+
+
+Validates that the given object is an instance of C<<<< $type >>>>.
+
+
+Examples:
+
+    assert_instance_of MyApp::Person->new(), 'MyApp::Person';
+
+Parameters:
+
+=over
+
+C<<<< $obj >>>> - The instance to check.
+
+
+C<<<< $type >>>> (I<<<< Class >>>>) - The type to expect.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+
+See Also:
+
+=over
+
+L<<<< S<<<<< #assert_is_a >>>>> | / assert_is_a >>>>
+
+
+=back
+
+=item B<<<< assert_is_a >>>>
+
+=item Aliased as: I<<<< assert_isa >>>>
+
+    - assert_is_a($obj, $type, $msg) # => Object 
+
+
+Validates that C<<<< $obj >>>> inherits from C<<<< $type >>>>.
+
+
+Examples:
+
+    assert_is_a 'Employee', 'Employee';
+    
+    assert_is_a Employee->new(), 'Employee';
+    
+    assert_is_a 'Employee', 'Person'; # assuming Employee->isa('Person')
+    
+    assert_is_a Employee->new(), 'Person';
+
+Parameters:
+
+=over
+
+C<<<< $obj >>>> - The instance or class to check.
+
+
+C<<<< $type >>>> (I<<<< Class >>>>) - The expected superclass.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< assert_match >>>>
+
+    - assert_match($string, $pattern, $msg) # => Object 
+
+
+Validates that the given C<<<< $string >>>> matches the given C<<<<
+$pattern >>>>.
+
+
+Examples:
+
+    assert_match 'Four score and seven years ago...', qr/score/;
+
+Parameters:
+
+=over
+
+C<<<< $string >>>> (I<<<< String >>>>) - The string to match.
+
+
+C<<<< $pattern >>>> (I<<<< Regex >>>>) - The regular expression to
+match against.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< assert_undef >>>>
+
+=item Aliased as: I<<<< refute_defined >>>>
+
+    - assert_undef($obj, $msg) # => Object 
+
+
+Validates that the given C<<<< $obj >>>> is undefined.
+
+
+Examples:
+
+    assert_undef $value;  # if not defined $value
+
+Parameters:
+
+=over
+
+C<<<< $obj >>>> - The value to check.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< flunk >>>>
+
+    - flunk($msg) # => Object 
+
+
+Causes the current test to exit immediately with a failing status.
+
+
+
+Parameters:
+
+=over
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< refute >>>>
+
+    - refute($test, $msg) # => Object 
+
+
+Asserts that C<<<< $test >>>> is falsey, and throws a L<<<< S<<<<<
+Test::Mini::Exception::Assert >>>>> | Test::Mini::Exception::Assert >>>>
+if that assertion fails.
+
+
+Examples:
+
+    refute 0;
+    
+    refute undef, 'Deny the untruths';
+
+Parameters:
+
+=over
+
+C<<<< $test >>>> - The value to test.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< refute_block >>>>
+
+    - refute_block($block, $msg) # => Object 
+
+
+Asserts that the given code reference returns a falsey value.
+
+
+Examples:
+
+    refute_block { '' };
+    
+    refute_block \&some_sub, 'expected worse from &some_sub';
+
+Parameters:
+
+=over
+
+C<<<< $block >>>> (I<<<< CODE >>>>) - The code reference to test.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< refute_can >>>>
+
+=item Aliased as: I<<<< refute_responds_to >>>>
+
+    - refute_can($obj, $method, $msg) # => Object 
+
+
+Verifies that the given C<<<< $obj >>>> is B<<<< not >>>> capable of
+responding to the given C<<<< $method >>>> name.
+
+
+Examples:
+
+    refute_can $date, 'to_time';
+    
+    refute_can $time, 'day', '$time cannot respond to #day';
+
+Parameters:
+
+=over
+
+C<<<< $obj >>>> - The object being tested.
+
+
+C<<<< $method >>>> (I<<<< String >>>>) - The method name being
+checked.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< refute_contains >>>>
+
+    - refute_contains($collection, $obj, $msg) # => Object 
+
+
+Verifies that the given C<<<< $collection >>>> does not contain the
+given C<<<< $obj >>>> as a member.
+
+
+Examples:
+
+    refute_contains [qw/ 1 2 3 /], 5;
+    
+    refute_contains { a => 'b' }, 'x';
+    
+    refute_contains 'expectorate', 'spec';
+    
+    refute_contains Collection->new(1, 2, 3), 5;  # unless Collection->contains(5)
+
+Parameters:
+
+=over
+
+C<<<< $collection >>>> (I<<<< Array|Hash|String|#contains >>>>) -
+The collection to test.
+
+
+C<<<< $obj >>>> - The needle to look for.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< refute_empty >>>>
+
+    - refute_empty($collection, $msg) # => Object 
+
+
+Verifies the non-emptiness of a collection.
+
+
+Examples:
+
+    refute_empty [ 1 ];
+    
+    refute_empty { a => 1 };
+    
+    refute_empty 'full';
+    
+    refute_empty Collection->new();  # unless Collection->new()->is_empty()
+
+Parameters:
+
+=over
+
+C<<<< $collection >>>> (I<<<< Array|Hash|String|#is_empty >>>>) -
+The collection under scrutiny.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< refute_equal >>>>
+
+=item Aliased as: I<<<< refute_eq >>>>
+
+    - refute_equal($actual, $unexpected, $msg) # => Object 
+
+
+Checks two given arguments for inequality.
+
+
+Examples:
+
+    refute_equal 3.001, 3;
+    
+    refute_equal lc('FOOL'), 'foo';
+    
+    refute_equal [qw/ 1 23 /], [ 1, 2, 3 ];
+    
+    refute_equal { a => 'ae' }, { a => 'eh' };
+    
+    refute_equal Class->new(), $expected;  # unless $expected->equals(Class->new())
+
+Parameters:
+
+=over
+
+C<<<< $actual >>>> - The value under test.
+
+
+C<<<< $expected >>>> - The tested value.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< refute_in_delta >>>>
+
+    - refute_in_delta($actual, $expected, $delta, $msg) # => Object 
+
+
+Checks that the difference between C<<<< $actual >>>> and C<<<<
+$expected >>>> is greater than C<<<< $delta >>>>.
+
+
+Examples:
+
+    refute_in_delta 1.002, 1;
+    
+    refute_in_delta 106, 100, 5;
+
+Parameters:
+
+=over
+
+C<<<< $actual >>>> (I<<<< Number >>>>) - The tested value.
+
+
+C<<<< $expected >>>> (I<<<< Number >>>>) - The static value.
+
+
+C<<<< $delta >>>> (I<<<< Number >>>>) - (0.001) The delta C<<<<
+$actual >>>> and C<<<< $expected >>>> are expected to differ by.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< refute_in_epsilon >>>>
+
+    - refute_in_epsilon($actual, $expected, $epsilon, $msg) # => Object 
+
+
+Checks that the difference between C<<<< $actual >>>> and C<<<<
+$expected >>>> is greater than a given fraction of the smaller of the
+two numbers.
+
+
+Examples:
+
+    refute_in_epsilon 21.0 / 7.0, Math::Trig::pi;
+    
+    refute_in_epsilon 220, 200, 0.20
+
+Parameters:
+
+=over
+
+C<<<< $actual >>>> (I<<<< Number >>>>) - The tested value.
+
+
+C<<<< $expected >>>> (I<<<< Number >>>>) - The static value.
+
+
+C<<<< $epsilon >>>> (I<<<< Number >>>>) - (0.001) The factor by
+which C<<<< $actual >>>> and C<<<< $expected >>>> are expected to
+differ by.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< refute_match >>>>
+
+    - refute_match($string, $pattern, $msg) # => Object 
+
+
+Validates that the given C<<<< $string >>>> does not match the given
+C<<<< $pattern >>>>.
+
+
+Examples:
+
+    refute_match 'Four score and seven years ago...', qr/score/;
+
+Parameters:
+
+=over
+
+C<<<< $string >>>> (I<<<< String >>>>) - The string to match.
+
+
+C<<<< $pattern >>>> (I<<<< Regex >>>>) - The regular expression to
+match against.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=item B<<<< skip >>>>
+
+    - skip($msg) # => Object 
+
+
+Allows the current test to be bypassed with an indeterminate status.
+
+
+
+Parameters:
+
+=over
+
+C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+
+
+=back
+
+=back
+
+=head2 Class Methods
+
+=over
+
+=item B<<<< import >>>>
+
+    + import($class) # => Object 
+
+
+Pulls all of the test-related methods into the calling package.
+
+=back
+
+=head2 Instance Methods
+
+=over
+
+=item B<<<< _count_assertions >>>>
+
+    # protected
+    - _count_assertions # => Object
+
+=item B<<<< _reset_assertions >>>>
+
+    # protected
+    - _reset_assertions # => Object
+
+=item B<<<< deref >>>>
+
+    # private
+    - deref($ref) # => Object 
+
+
+Dereferences the given argument, if possible.
+
+
+
+Parameters:
+
+=over
+
+C<<<< $ref >>>> - The argument to dereference.
+
+
+=back
+
+
+Returns:
+
+=over
+
+The referenced value or values.
+
+
+=back
+
+=item B<<<< inspect >>>>
+
+    # private
+    - inspect # => String 
+
+
+Produce a more useful string representation of the given argument.
+
+
+
+Parameters:
+
+=over
+
+C<<<< $obj >>>> - The object to describe.
+
+
+=back
+
+
+Returns:
+
+=over
+
+(I<<<< String >>>>) - A description of the given object.
+
+
+=back
+
+=item B<<<< message >>>>
+
+    # private
+    - message($default, $msg) # => Object 
+
+
+Formats error messages, appending periods and defaulting undefs as
+appropriate.
+
+
+
+Parameters:
+
+=over
+
+C<<<< $default >>>> (I<<<< String >>>>) - The default message to
+use.
+
+
+C<<<< $msg >>>> (I<<<< String >>>>) - A message to use in place of
+the default.
+
+
+=back
+
+
+Returns:
+
+=over
+
+A well-formatted message.
+
+
+=back
+
+=back
+

@@ -184,3 +184,401 @@ repeatable test orderings.
 
 =back
 
+=head1 METHODS
+
+=head2 Attribute Accessors
+
+=over
+
+=item B<<<< exit_code >>>>
+
+    - exit_code($self) # => Object 
+
+
+Exit code, representing the status of the test run.
+
+
+
+
+Returns:
+
+=over
+
+Exit code, representing the status of the test run.
+
+
+=back
+
+=item B<<<< filter >>>>
+
+    - filter($self) # => Object 
+
+
+Test name filter.
+
+
+
+
+Returns:
+
+=over
+
+Test name filter.
+
+
+=back
+
+=item B<<<< logger >>>>
+
+    - logger($self) # => Object 
+
+
+Logger instance.
+
+
+
+
+Returns:
+
+=over
+
+Logger instance.
+
+
+=back
+
+=item B<<<< seed >>>>
+
+    - seed($self) # => Object 
+
+
+Randomness seed.
+
+
+
+
+Returns:
+
+=over
+
+Randomness seed.
+
+
+=back
+
+=item B<<<< verbose >>>>
+
+    - verbose($self) # => Object 
+
+
+Logger verbosity.
+
+
+
+
+Returns:
+
+=over
+
+Logger verbosity.
+
+
+=back
+
+=back
+
+=head2 Test Run Hooks
+
+=over
+
+=item B<<<< run >>>>
+
+    - run($self) # => Object 
+
+
+Begins the test run. Loads and instantiates the test output logger, then
+dispatches to L<<<< S<<<<< #run_test_suite >>>>> | / run_test_suite >>>>
+(passing the L<<<< S<<<<< #filter >>>>> | / filter >>>> and L<<<< S<<<<<
+#seed >>>>> | / seed >>>>, as appropriate).
+
+
+
+
+Returns:
+
+=over
+
+The result of the L<<<< S<<<<< #run_test_suite >>>>> | /
+run_test_suite >>>> call.
+
+
+=back
+
+=item B<<<< run_test >>>>
+
+    - run_test($self, $tc, $test) # => Integer 
+
+
+Runs a specific test.
+
+
+
+Parameters:
+
+=over
+
+C<<<< $tc >>>> (I<<<< Class >>>>) - The test case owning the test
+method.
+
+
+C<<<< $test >>>> (I<<<< String >>>>) - The name of the test method
+to be run.
+
+
+=back
+
+
+Returns:
+
+=over
+
+(I<<<< Integer >>>>) - The number of assertions called by the test.
+
+
+=back
+
+=item B<<<< run_test_case >>>>
+
+    - run_test_case($self, $tc, @tests) # => Object 
+
+
+Runs tests in a test case.
+
+
+
+Parameters:
+
+=over
+
+C<<<< $tc >>>> (I<<<< Class >>>>) - The test case to run.
+
+
+C<<<< @tests >>>> (I<<<< Array<String> >>>>) - A list of tests to be
+run.
+
+
+=back
+
+=item B<<<< run_test_suite >>>>
+
+    - run_test_suite($self, %args) # => Object 
+
+
+Runs the test suite. Finds subclasses of L<<<< S<<<<<
+Test::Mini::TestCase >>>>> | Test::Mini::TestCase >>>>, and dispatches
+to L<<<< S<<<<< #run_test_case >>>>> | / run_test_case >>>> with the
+name of each test case and a list test methods to be run.
+
+
+
+Parameters:
+
+=over
+
+C<<<< %args >>>> (I<<<< Hash >>>>) 
+
+
+=back
+
+
+
+
+
+
+
+Valid Options for C<%args>:
+
+=over
+
+filter (I<<<< String >>>>) - Test name filter.
+
+
+seed (I<<<< String >>>>) - Randomness seed.
+
+
+=back
+
+
+Returns:
+
+=over
+
+The value of L<<<< S<<<<< #exit_code >>>>> | / exit_code >>>>.
+
+
+=back
+
+=back
+
+=head2 Callbacks
+
+=over
+
+=item B<<<< error >>>>
+
+    - error($self, $tc, $test, $e) # => Object 
+
+
+Callback for dying tests.
+
+
+
+Parameters:
+
+=over
+
+C<<<< $tc >>>> (I<<<< Class >>>>) - The test case owning the test
+method.
+
+
+C<<<< $test >>>> (I<<<< String >>>>) - The name of the test with an
+error.
+
+
+C<<<< $e >>>> (I<<<< Test::Mini::Exception >>>>) - The exception
+object.
+
+
+=back
+
+=item B<<<< fail >>>>
+
+    - fail($self, $tc, $test, $e) # => Object 
+
+
+Callback for failing tests.
+
+
+
+Parameters:
+
+=over
+
+C<<<< $tc >>>> (I<<<< Class >>>>) - The test case owning the test
+method.
+
+
+C<<<< $test >>>> (I<<<< String >>>>) - The name of the failed test.
+
+
+C<<<< $e >>>> (I<<<< Test::Mini::Exception::Assert >>>>) - The
+exception object.
+
+
+=back
+
+=item B<<<< pass >>>>
+
+    - pass($self, $tc, $test) # => Object 
+
+
+Callback for passing tests.
+
+
+
+Parameters:
+
+=over
+
+C<<<< $tc >>>> (I<<<< Class >>>>) - The test case owning the test
+method.
+
+
+C<<<< $test >>>> (I<<<< String >>>>) - The name of the passing test.
+
+
+=back
+
+=item B<<<< skip >>>>
+
+    - skip($self, $tc, $test, $e) # => Object 
+
+
+Callback for skipped tests.
+
+
+
+Parameters:
+
+=over
+
+C<<<< $tc >>>> (I<<<< Class >>>>) - The test case owning the test
+method.
+
+
+C<<<< $test >>>> (I<<<< String >>>>) - The name of the skipped test.
+
+
+C<<<< $e >>>> (I<<<< Test::Mini::Exception::Skip >>>>) - The
+exception object.
+
+
+=back
+
+=back
+
+=head2 Class Methods
+
+=over
+
+=item B<<<< new >>>>
+
+    + new($class, %args) # => Object 
+
+
+Constructor. Arguments may be provided explicitly to the constructor or
+implicitly via either @ARGV (parsed by L<<<< S<<<<< Getopt::Long >>>>> |
+Getopt::Long >>>>) or environment variables ("TEST_MINI_$option").
+
+
+
+Parameters:
+
+=over
+
+C<<<< %args >>>> (I<<<< Hash >>>>) - Initial state for the new
+instance.
+
+
+=back
+
+
+
+
+
+
+
+Valid Options for C<%args>:
+
+=over
+
+verbose - Logger verbosity.  Defaults to C<<<<< 0 >>>>>.
+
+
+filter (I<<<< String >>>>) - Test name filter.  Defaults to C<<<<<
+'' >>>>>.
+
+
+logger (I<<<< Class >>>>) - Logger class name.  Defaults to C<<<<<
+Test::Mini::Logger::TAP >>>>>.
+
+
+seed (I<<<< Integer >>>>) - Randomness seed.  Defaults to a random
+number C<<<< < 64_000_000 >>>>
+.
+
+
+=back
+
+=back
+

@@ -8,3 +8,61 @@ Test::Mini::Logger::TAP - Default {Test::Mini} Output Logger
 
 S<C<Test::Mini::Logger::TAP>> is a subclass of S<L<Test::Mini::Logger>>.
 
+=head1 METHODS
+
+=head2 Class Methods
+
+=over
+
+=item B<<<< new >>>>
+
+    + new($class, %args) # => Object
+
+=back
+
+=head2 Instance Methods
+
+=over
+
+=item B<<<< begin_test >>>>
+
+    - begin_test($self) # => Object
+
+=item B<<<< begin_test_case >>>>
+
+    - begin_test_case($self, $tc, @tests) # => Object
+
+=item B<<<< diag >>>>
+
+    - diag($self, @msgs) # => Object
+
+=item B<<<< error >>>>
+
+    - error($self, undef, $test, $msg) # => Object
+
+=item B<<<< fail >>>>
+
+    - fail($self, undef, $test, $msg) # => Object
+
+=item B<<<< inc_counter >>>>
+
+    - inc_counter($self) # => Object
+
+=item B<<<< pass >>>>
+
+    - pass($self, undef, $test) # => Object
+
+=item B<<<< reset_counter >>>>
+
+    - reset_counter($self) # => Object
+
+=item B<<<< skip >>>>
+
+    - skip($self, undef, $test, $msg) # => Object
+
+=item B<<<< test_counter >>>>
+
+    - test_counter($self) # => Object
+
+=back
+
