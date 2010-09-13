@@ -1,56 +1,55 @@
-
 use strict;
 use warnings;
 
- BEGIN { require 5.008; } 
+BEGIN { require 5.008; } 
 
 use ExtUtils::MakeMaker 6.31;
+use ExtUtils::Manifest  1.56;
 
-
+my $SKIP_FILES = <<SKIP;
+SKIP
 
 my %WriteMakefileArgs = (
-                       'test' => {
-                                   'TESTS' => 't/*.t t/Demonstrations/*.t t/Test/Mini/*.t t/Test/Mini/Logger/*.t t/Test/Mini/Unit/Sugar/*.t'
-                                 },
-                       'NAME' => 'Test::Mini',
-                       'DISTNAME' => 'Test-Mini',
-                       'CONFIGURE_REQUIRES' => {
-                                                 'ExtUtils::MakeMaker' => '6.31'
-                                               },
-                       'AUTHOR' => 'Pieter van de Bruggen <pvande@cpan.org>',
-                       'BUILD_REQUIRES' => {
-                                             'Test::More' => '0',
-                                             'File::Find' => '0',
-                                             'File::Temp' => '0',
-                                             'Mock::Collection' => '0',
-                                             'Text::Outdent' => '0.01',
-                                             'B' => '0'
-                                           },
-                       'ABSTRACT' => 'Clean Unit Testing',
-                       'EXE_FILES' => [],
-                       'VERSION' => '0.06',
-                       'PREREQ_PM' => {
-                                        'Scalar::Util' => '1.21',
-                                        'IO::Scalar' => '2.110',
-                                        'Class::MOP' => '1.00',
-                                        'aliased' => '0',
-                                        'List::Util' => '1.21',
-                                        'List::MoreUtils' => '0',
-                                        'Try::Tiny' => '0.04',
-                                        'Getopt::Long' => '0',
-                                        'Sub::Name' => '0',
-                                        'B::Hooks::EndOfScope' => '0',
-                                        'Exception::Class' => '1.29',
-                                        'B::Hooks::OP::Check' => '0.18',
-                                        'Data::Inspect' => '0.03',
-                                        'Sub::Install' => '0',
-                                        'Text::Outdent' => '0.01',
-                                        'Devel::Declare' => '0.006',
-                                        'Devel::Declare::Context::Simple' => '0'
-                                      },
-                       'LICENSE' => 'perl'
-                     );
-
+    'NAME'     => 'Test::Mini',
+    'ABSTRACT' => 'Lightweight xUnit Testing for Perl',
+    'VERSION'  => 'v0.6.0_1',
+    'AUTHOR'   => 'Pieter van de Bruggen <pvande@cpan.org>',
+    'LICENSE'  => 'perl',
+    'PREREQ_PM' => {
+        'Try::Tiny'        => '0.04',
+        'Scalar::Util'     => '1.21',
+        'List::Util'       => '1.21',
+        'List::MoreUtils'  => '0.22',
+        'MRO::Compat'      => '0.10',
+        'Getopt::Long'     => '2.38',
+        'Time::HiRes'      => '1.9719',
+        'Exception::Class' => '1.30',
+        'namespace::clean' => '0.14',
+        'Data::Inspect'    => '0.03',
+        'Text::Outdent'    => '0.01',
+    },
+    'BUILD_REQUIRES' => {
+        'Test::More' => '0.96',
+        'B'          => '0',
+        'aliased'    => '0.30',
+        'IO::Scalar' => '2.110',
+    },
+    'CONFIGURE_REQUIRES' => {
+         'ExtUtils::MakeMaker' => '6.31',
+         'ExtUtils::Manifest'  => '1.56',
+    },
+#   'DIST_REQUIRES' => {
+#       'ShipIt'                 => '0.55',
+#       'ShipIt::Step::Manifest' => '0.1',
+#   },
+    'test' => {
+        'TESTS' => 't/*.t t/*/*.t t/*/*/*.t t/*/*/*/*.t t/*/*/*/*/*.t',
+    },
+    'dist' => {
+        'PREOP'  => '',
+        'POSTOP' => 'make realclean; rm MANIFEST',
+    },
+);
 
 delete $WriteMakefileArgs{BUILD_REQUIRES}
   unless eval { ExtUtils::MakeMaker->VERSION(6.56) };
@@ -58,7 +57,24 @@ delete $WriteMakefileArgs{BUILD_REQUIRES}
 delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
   unless eval { ExtUtils::MakeMaker->VERSION(6.52) };
 
+(my $DISTNAME = $WriteMakefileArgs{NAME}) =~ s/::/-/g;
+
+# Create a MANIFEST.SKIP file.
+open(GITIGNORE, '<.gitignore');
+open(SKIP, '>MANIFEST.SKIP');
+print SKIP "#!include_default\n";
+print SKIP "MANIFEST.SKIP.*\n";
+print SKIP "^$DISTNAME.*\n";
+print SKIP <GITIGNORE>;
+print SKIP $SKIP_FILES;
+close SKIP;
+close GITIGNORE;
+
+# Create a new MANIFEST.
+ExtUtils::Manifest::mkmanifest();
+
+# Write the new Makefile.
 WriteMakefile(%WriteMakefileArgs);
 
-
-
+# Cleanup the MANIFEST.SKIP files.
+unlink glob 'MANIFEST.{,SKIP}*';

@@ -1,67 +1,93 @@
+# Base class for Test::Mini test cases.
+#
+# @see Test::Mini::Runner
 package Test::Mini::TestCase;
 use strict;
 use warnings;
 
+use Test::Mini;
 use Exception::Class;
 use Test::Mini::Assertions;
 
-{
-    my $class = __PACKAGE__;
-    no strict 'refs';
-    *$class = \{ 'setup' => [], 'teardown' => [] };
-}
-
+# Constructor.
+#
+# @private
+# @param [Hash] %args Initial state for the new instance.
+# @option %args name The specific test this instance should run.
 sub new {
     my ($class, %args) = @_;
-    return bless { passed => 0, %args }, $class;
+    return bless { %args, passed => 0 }, $class;
 }
 
-sub name {
-    my ($self) = @_;
-    return $self->{name};
-}
-
-sub passed {
-    my ($self, $value) = @_;;
-    return $self->{passed} if @_ % 2;
-    $self->{passed} = $value;
-}
-
+# Test setup behavior, automatically invoked prior to each test.  Intended to
+# be overridden by subclasses.
+#
+# @example
+#   package TestSomething;
+#   use base 'Test::Mini::TestCase';
+#
+#   use Something;
+#
+#   sub setup { $obj = Something->new(); }
+#
+#   sub test_can_foo {
+#       assert_can($obj, 'foo');
+#   }
+#
+# @see #teardown
 sub setup {
     my ($self) = @_;
-    no strict 'refs';
-    for my $class (reverse @{ mro::get_linear_isa(ref $self) }) {
-        $_->($self) for @{ ${"::$class"}->{setup} };
-    }
 }
 
+# Test teardown behavior, automatically invoked following each test.  Intended
+# to be overridden by subclasses.
+#
+# @example
+#   package Test;
+#   use base 'Test::Mini::TestCase';
+#
+#   sub teardown { unlink 'foo.bar' }
+#
+#   sub test_touching_files {
+#       `touch foo.bar`;
+#       assert(-f 'foo.bar');
+#   }
+#
+# @see #setup
 sub teardown {
     my ($self) = @_;
-    no strict 'refs';
-    for my $class (@{ mro::get_linear_isa(ref $self) }) {
-        $_->($self) for reverse @{ ${"::$class"}->{teardown} || [] };
-    }
 }
 
+# Runs the test specified at construction time.  This method is responsible
+# for invoking the setup and teardown advice for the method, in addition to
+# ensuring that any fatal errors encountered by the program are suitably
+# handled.  Appropriate diagnostic information should be sent to the supplied
+# +$runner+.
+#
+# @private
+# @param [Test::Mini::Runner] $runner
+# @return The number of assertions called by this test.
 sub run {
     my ($self, $runner) = @_;
     my $e;
-    my $test = $self->name();
+    my $test = $self->{name};
 
     eval {
         local $SIG{__DIE__} = sub {
-            package Test::Mini::Unit::SIGDIE;
+            # Package declaration for isolating the callstack.
+            # @api private
+            package Test::Mini::SIGDIE;
 
-            die $@ if UNIVERSAL::isa($@, 'Test::Mini::Unit::Error');
+            die $@ if UNIVERSAL::isa($@, 'Test::Mini::Exception');
 
             (my $msg = "@_") =~ s/ at .*? line \d+\.\n$//;
-            my $error = Test::Mini::Unit::Error->new(
+            my $error = Test::Mini::Exception->new(
                 message        => "$msg\n",
-                ignore_package => [qw/ Test::Mini::Unit::SIGDIE Carp /],
+                ignore_package => [qw/ Test::Mini::SIGDIE Carp /],
             );
 
             my $me = $error->trace->frame(0);
-            if ($me->{subroutine} eq 'Test::Mini::Unit::TestCase::__ANON__') {
+            if ($me->{subroutine} eq 'Test::Mini::TestCase::__ANON__') {
                 $me->{subroutine} = 'die';
                 $me->{args} = [ $msg ];
             }
@@ -69,36 +95,36 @@ sub run {
             die $error;
         };
 
-        $self->setup() if $self->can('setup');
+        $self->setup();
         $self->$test();
-        $self->passed(1);
+        $self->{passed} = 1;
 
-        die 'No assertions called' unless $self->count_assertions();
+        die 'No assertions called' unless count_assertions();
     };
 
     if ($e = Exception::Class->caught()) {
-        $self->passed(0);
+        $self->{passed} = 0;
 
-        if ($e = Exception::Class->caught('Test::Mini::Unit::Skip')) {
+        if ($e = Exception::Class->caught('Test::Mini::Exception::Skip')) {
             $runner->skip(ref $self, $test, $e);
         }
-        elsif ($e = Exception::Class->caught('Test::Mini::Unit::Assert')) {
+        elsif ($e = Exception::Class->caught('Test::Mini::Exception::Assert')) {
             $runner->fail(ref $self, $test, $e);
         }
-        elsif ($e = Exception::Class->caught('Test::Mini::Unit::Error')) {
+        elsif ($e = Exception::Class->caught('Test::Mini::Exception')) {
             $runner->error(ref $self, $test, $e);
         }
     }
 
     eval {
-        $self->teardown() if $self->can('teardown');
-        $runner->pass(ref $self, $self->name()) if $self->passed();
+        $self->teardown();
+        $runner->pass(ref $self, $self->{name}) if $self->{passed};
     };
     if ($e = Exception::Class->caught()) {
         $runner->error(ref $self, $test, $e);
     }
 
-    return $self->count_assertions();
+    return reset_assertions();
 }
 
 1;
