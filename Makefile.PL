@@ -12,7 +12,7 @@ SKIP
 my %WriteMakefileArgs = (
     'NAME'     => 'Test::Mini',
     'ABSTRACT' => 'Lightweight xUnit Testing for Perl',
-    'VERSION'  => 'v0.6.0_2',
+    'VERSION'  => 'v0.6.0_3',
     'AUTHOR'   => 'Pieter van de Bruggen <pvande@cpan.org>',
     'LICENSE'  => 'perl',
     'PREREQ_PM' => {

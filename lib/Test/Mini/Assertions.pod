@@ -12,7 +12,7 @@ Test::Mini::Assertions - Basic Assertions for Test::Mini
 
 =item B<<<< assert >>>>
 
-    - assert($test, $msg) # => Object 
+    assert($test, $msg) # => Object 
 
 
 Asserts that C<<<< $test >>>> is truthy, and throws a L<<<< S<<<<<
@@ -30,17 +30,22 @@ Parameters:
 
 =over
 
-C<<<< $test >>>> - The value to test.
+=item *
+
+B<<<<< C<<<< $test >>>> >>>>> -- The value to test.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
 
 =item B<<<< assert_block >>>>
 
-    - assert_block($block, $msg) # => Object 
+    assert_block($block, $msg) # => Object 
 
 
 Asserts that the given code reference returns a truthy value.
@@ -56,10 +61,16 @@ Parameters:
 
 =over
 
-C<<<< $block >>>> (I<<<< CODE >>>>) - The code reference to test.
+=item *
+
+(I<<<< CODE >>>>) B<<<<< C<<<< $block >>>> >>>>> -- The code
+reference to test.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
@@ -68,7 +79,7 @@ C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
 
 =item Aliased as: I<<<< assert_responds_to >>>>
 
-    - assert_can($obj, $method, $msg) # => Object 
+    assert_can($obj, $method, $msg) # => Object 
 
 
 Verifies that the given C<<<< $obj >>>> is capable of responding to the
@@ -85,14 +96,21 @@ Parameters:
 
 =over
 
-C<<<< $obj >>>> - The object being tested.
+=item *
+
+B<<<<< C<<<< $obj >>>> >>>>> -- The object being tested.
 
 
-C<<<< $method >>>> (I<<<< String >>>>) - The method name being
-checked for.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $method >>>> >>>>> -- The method
+name being checked for.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
@@ -101,7 +119,7 @@ C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
 
 =item Aliased as: I<<<< assert_includes >>>>
 
-    - assert_contains($collection, $obj, $msg) # => Object 
+    assert_contains($collection, $obj, $msg) # => Object 
 
 
 Verifies that the given C<<<< $collection >>>> contains the given C<<<<
@@ -122,14 +140,21 @@ Parameters:
 
 =over
 
-C<<<< $collection >>>> (I<<<< Array|Hash|String|#contains >>>>) -
-The collection to test.
+=item *
+
+(I<<<< Array|Hash|String|#contains >>>>) B<<<<< C<<<< $collection
+>>>> >>>>> -- The collection to test.
 
 
-C<<<< $obj >>>> - The needle to find.
+=item *
+
+B<<<<< C<<<< $obj >>>> >>>>> -- The needle to find.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
@@ -138,7 +163,7 @@ C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
 
 =item Aliased as: I<<<< refute_undef >>>>
 
-    - assert_defined($obj, $msg) # => Object 
+    assert_defined($obj, $msg) # => Object 
 
 
 Validates that the given C<<<< $obj >>>> is defined.
@@ -152,17 +177,22 @@ Parameters:
 
 =over
 
-C<<<< $obj >>>> - The value to check.
+=item *
+
+B<<<<< C<<<< $obj >>>> >>>>> -- The value to check.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
 
 =item B<<<< assert_dies >>>>
 
-    - assert_dies($sub, $error, $msg) # => Object 
+    assert_dies($sub, $error, $msg) # => Object 
 
 
 Tests that the supplied code block dies, and fails if it succeeds.  If
@@ -180,21 +210,29 @@ Parameters:
 
 =over
 
-C<<<< $sub >>>> (I<<<< CODE >>>>) - The code that should die.
+=item *
+
+(I<<<< CODE >>>>) B<<<<< C<<<< $sub >>>> >>>>> -- The code that
+should die.
 
 
-C<<<< $error >>>> (I<<<< String >>>>) - ('') The error substring
-expected.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $error >>>> >>>>> -- The (optional)
+error substring expected.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
 
 =item B<<<< assert_empty >>>>
 
-    - assert_empty($collection, $msg) # => Object 
+    assert_empty($collection, $msg) # => Object 
 
 
 Verifies the emptiness of a collection.
@@ -214,11 +252,16 @@ Parameters:
 
 =over
 
-C<<<< $collection >>>> (I<<<< Array|Hash|String|#is_empty >>>>) -
-The collection under scrutiny.
+=item *
+
+(I<<<< Array|Hash|String|#is_empty >>>>) B<<<<< C<<<< $collection
+>>>> >>>>> -- The collection under scrutiny.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
@@ -227,7 +270,7 @@ C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
 
 =item Aliased as: I<<<< assert_eq >>>>
 
-    - assert_equal($actual, $expected, $msg) # => Object 
+    assert_equal($actual, $expected, $msg) # => Object 
 
 
 Checks two given arguments for equality.
@@ -249,20 +292,27 @@ Parameters:
 
 =over
 
-C<<<< $actual >>>> - The value under test.
+=item *
+
+B<<<<< C<<<< $actual >>>> >>>>> -- The value under test.
 
 
-C<<<< $expected >>>> - The expected value.
+=item *
+
+B<<<<< C<<<< $expected >>>> >>>>> -- The expected value.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
 
 =item B<<<< assert_in_delta >>>>
 
-    - assert_in_delta($actual, $expected, $delta, $msg) # => Object 
+    assert_in_delta($actual, $expected, $delta, $msg) # => Object 
 
 
 Checks that the difference between C<<<< $actual >>>> and C<<<<
@@ -279,23 +329,35 @@ Parameters:
 
 =over
 
-C<<<< $actual >>>> (I<<<< Number >>>>) - The tested value.
+=item *
+
+(I<<<< Number >>>>) B<<<<< C<<<< $actual >>>> >>>>> -- The tested
+value.
 
 
-C<<<< $expected >>>> (I<<<< Number >>>>) - The static value.
+=item *
+
+(I<<<< Number >>>>) B<<<<< C<<<< $expected >>>> >>>>> -- The static
+value.
 
 
-C<<<< $delta >>>> (I<<<< Number >>>>) - (0.001) The expected delta.
+=item *
+
+(I<<<< Number >>>>) B<<<<< C<<<< $delta >>>> >>>>> -- The expected
+delta.  Defaults to 0.001.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
 
 =item B<<<< assert_in_epsilon >>>>
 
-    - assert_in_epsilon($actual, $expected, $epsilon, $msg) # => Object 
+    assert_in_epsilon($actual, $expected, $epsilon, $msg) # => Object 
 
 
 Checks that the difference between C<<<< $actual >>>> and C<<<<
@@ -313,24 +375,35 @@ Parameters:
 
 =over
 
-C<<<< $actual >>>> (I<<<< Number >>>>) - The tested value.
+=item *
+
+(I<<<< Number >>>>) B<<<<< C<<<< $actual >>>> >>>>> -- The tested
+value.
 
 
-C<<<< $expected >>>> (I<<<< Number >>>>) - The static value.
+=item *
+
+(I<<<< Number >>>>) B<<<<< C<<<< $expected >>>> >>>>> -- The static
+value.
 
 
-C<<<< $epsilon >>>> (I<<<< Number >>>>) - (0.001) The expected
-tolerance factor.
+=item *
+
+(I<<<< Number >>>>) B<<<<< C<<<< $epsilon >>>> >>>>> -- The expected
+tolerance factor.  Defaults to 0.001.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
 
 =item B<<<< assert_instance_of >>>>
 
-    - assert_instance_of($obj, $type, $msg) # => Object 
+    assert_instance_of($obj, $type, $msg) # => Object 
 
 
 Validates that the given object is an instance of C<<<< $type >>>>.
@@ -344,13 +417,21 @@ Parameters:
 
 =over
 
-C<<<< $obj >>>> - The instance to check.
+=item *
+
+B<<<<< C<<<< $obj >>>> >>>>> -- The instance to check.
 
 
-C<<<< $type >>>> (I<<<< Class >>>>) - The type to expect.
+=item *
+
+(I<<<< Class >>>>) B<<<<< C<<<< $type >>>> >>>>> -- The type to
+expect.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
@@ -360,7 +441,9 @@ See Also:
 
 =over
 
-L<<<< S<<<<< #assert_is_a >>>>> | / assert_is_a >>>>
+=item *
+
+L<<<< S<<<<< #assert_is_a >>>>> | Test::Mini::Assertions / assert_is_a >>>>
 
 
 =back
@@ -369,7 +452,7 @@ L<<<< S<<<<< #assert_is_a >>>>> | / assert_is_a >>>>
 
 =item Aliased as: I<<<< assert_isa >>>>
 
-    - assert_is_a($obj, $type, $msg) # => Object 
+    assert_is_a($obj, $type, $msg) # => Object 
 
 
 Validates that C<<<< $obj >>>> inherits from C<<<< $type >>>>.
@@ -389,20 +472,28 @@ Parameters:
 
 =over
 
-C<<<< $obj >>>> - The instance or class to check.
+=item *
+
+B<<<<< C<<<< $obj >>>> >>>>> -- The instance or class to check.
 
 
-C<<<< $type >>>> (I<<<< Class >>>>) - The expected superclass.
+=item *
+
+(I<<<< Class >>>>) B<<<<< C<<<< $type >>>> >>>>> -- The expected
+superclass.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
 
 =item B<<<< assert_match >>>>
 
-    - assert_match($string, $pattern, $msg) # => Object 
+    assert_match($string, $pattern, $msg) # => Object 
 
 
 Validates that the given C<<<< $string >>>> matches the given C<<<<
@@ -417,14 +508,22 @@ Parameters:
 
 =over
 
-C<<<< $string >>>> (I<<<< String >>>>) - The string to match.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $string >>>> >>>>> -- The string to
+match.
 
 
-C<<<< $pattern >>>> (I<<<< Regex >>>>) - The regular expression to
-match against.
+=item *
+
+(I<<<< Regex >>>>) B<<<<< C<<<< $pattern >>>> >>>>> -- The regular
+expression to match against.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
@@ -433,7 +532,7 @@ C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
 
 =item Aliased as: I<<<< refute_defined >>>>
 
-    - assert_undef($obj, $msg) # => Object 
+    assert_undef($obj, $msg) # => Object 
 
 
 Validates that the given C<<<< $obj >>>> is undefined.
@@ -447,17 +546,22 @@ Parameters:
 
 =over
 
-C<<<< $obj >>>> - The value to check.
+=item *
+
+B<<<<< C<<<< $obj >>>> >>>>> -- The value to check.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
 
 =item B<<<< flunk >>>>
 
-    - flunk($msg) # => Object 
+    flunk($msg) # => Object 
 
 
 Causes the current test to exit immediately with a failing status.
@@ -468,14 +572,17 @@ Parameters:
 
 =over
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
 
 =item B<<<< refute >>>>
 
-    - refute($test, $msg) # => Object 
+    refute($test, $msg) # => Object 
 
 
 Asserts that C<<<< $test >>>> is falsey, and throws a L<<<< S<<<<<
@@ -493,17 +600,22 @@ Parameters:
 
 =over
 
-C<<<< $test >>>> - The value to test.
+=item *
+
+B<<<<< C<<<< $test >>>> >>>>> -- The value to test.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
 
 =item B<<<< refute_block >>>>
 
-    - refute_block($block, $msg) # => Object 
+    refute_block($block, $msg) # => Object 
 
 
 Asserts that the given code reference returns a falsey value.
@@ -519,10 +631,16 @@ Parameters:
 
 =over
 
-C<<<< $block >>>> (I<<<< CODE >>>>) - The code reference to test.
+=item *
+
+(I<<<< CODE >>>>) B<<<<< C<<<< $block >>>> >>>>> -- The code
+reference to test.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
@@ -531,7 +649,7 @@ C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
 
 =item Aliased as: I<<<< refute_responds_to >>>>
 
-    - refute_can($obj, $method, $msg) # => Object 
+    refute_can($obj, $method, $msg) # => Object 
 
 
 Verifies that the given C<<<< $obj >>>> is B<<<< not >>>> capable of
@@ -548,21 +666,28 @@ Parameters:
 
 =over
 
-C<<<< $obj >>>> - The object being tested.
+=item *
+
+B<<<<< C<<<< $obj >>>> >>>>> -- The object being tested.
 
 
-C<<<< $method >>>> (I<<<< String >>>>) - The method name being
-checked.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $method >>>> >>>>> -- The method
+name being checked.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
 
 =item B<<<< refute_contains >>>>
 
-    - refute_contains($collection, $obj, $msg) # => Object 
+    refute_contains($collection, $obj, $msg) # => Object 
 
 
 Verifies that the given C<<<< $collection >>>> does not contain the
@@ -583,21 +708,28 @@ Parameters:
 
 =over
 
-C<<<< $collection >>>> (I<<<< Array|Hash|String|#contains >>>>) -
-The collection to test.
+=item *
+
+(I<<<< Array|Hash|String|#contains >>>>) B<<<<< C<<<< $collection
+>>>> >>>>> -- The collection to test.
 
 
-C<<<< $obj >>>> - The needle to look for.
+=item *
+
+B<<<<< C<<<< $obj >>>> >>>>> -- The needle to look for.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
 
 =item B<<<< refute_empty >>>>
 
-    - refute_empty($collection, $msg) # => Object 
+    refute_empty($collection, $msg) # => Object 
 
 
 Verifies the non-emptiness of a collection.
@@ -617,11 +749,16 @@ Parameters:
 
 =over
 
-C<<<< $collection >>>> (I<<<< Array|Hash|String|#is_empty >>>>) -
-The collection under scrutiny.
+=item *
+
+(I<<<< Array|Hash|String|#is_empty >>>>) B<<<<< C<<<< $collection
+>>>> >>>>> -- The collection under scrutiny.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
@@ -630,7 +767,7 @@ C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
 
 =item Aliased as: I<<<< refute_eq >>>>
 
-    - refute_equal($actual, $unexpected, $msg) # => Object 
+    refute_equal($actual, $unexpected, $msg) # => Object 
 
 
 Checks two given arguments for inequality.
@@ -652,20 +789,27 @@ Parameters:
 
 =over
 
-C<<<< $actual >>>> - The value under test.
+=item *
+
+B<<<<< C<<<< $actual >>>> >>>>> -- The value under test.
 
 
-C<<<< $expected >>>> - The tested value.
+=item *
+
+B<<<<< C<<<< $expected >>>> >>>>> -- The tested value.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
 
 =item B<<<< refute_in_delta >>>>
 
-    - refute_in_delta($actual, $expected, $delta, $msg) # => Object 
+    refute_in_delta($actual, $expected, $delta, $msg) # => Object 
 
 
 Checks that the difference between C<<<< $actual >>>> and C<<<<
@@ -682,24 +826,36 @@ Parameters:
 
 =over
 
-C<<<< $actual >>>> (I<<<< Number >>>>) - The tested value.
+=item *
+
+(I<<<< Number >>>>) B<<<<< C<<<< $actual >>>> >>>>> -- The tested
+value.
 
 
-C<<<< $expected >>>> (I<<<< Number >>>>) - The static value.
+=item *
+
+(I<<<< Number >>>>) B<<<<< C<<<< $expected >>>> >>>>> -- The static
+value.
 
 
-C<<<< $delta >>>> (I<<<< Number >>>>) - (0.001) The delta C<<<<
-$actual >>>> and C<<<< $expected >>>> are expected to differ by.
+=item *
+
+(I<<<< Number >>>>) B<<<<< C<<<< $delta >>>> >>>>> -- The delta
+C<<<< $actual >>>> and C<<<< $expected >>>> are expected to differ
+by.  Defaults to 0.001.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
 
 =item B<<<< refute_in_epsilon >>>>
 
-    - refute_in_epsilon($actual, $expected, $epsilon, $msg) # => Object 
+    refute_in_epsilon($actual, $expected, $epsilon, $msg) # => Object 
 
 
 Checks that the difference between C<<<< $actual >>>> and C<<<<
@@ -717,25 +873,36 @@ Parameters:
 
 =over
 
-C<<<< $actual >>>> (I<<<< Number >>>>) - The tested value.
+=item *
+
+(I<<<< Number >>>>) B<<<<< C<<<< $actual >>>> >>>>> -- The tested
+value.
 
 
-C<<<< $expected >>>> (I<<<< Number >>>>) - The static value.
+=item *
+
+(I<<<< Number >>>>) B<<<<< C<<<< $expected >>>> >>>>> -- The static
+value.
 
 
-C<<<< $epsilon >>>> (I<<<< Number >>>>) - (0.001) The factor by
-which C<<<< $actual >>>> and C<<<< $expected >>>> are expected to
-differ by.
+=item *
+
+(I<<<< Number >>>>) B<<<<< C<<<< $epsilon >>>> >>>>> -- The factor
+by which C<<<< $actual >>>> and C<<<< $expected >>>> are expected to
+differ by.  Defaults to 0.001.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
 
 =item B<<<< refute_match >>>>
 
-    - refute_match($string, $pattern, $msg) # => Object 
+    refute_match($string, $pattern, $msg) # => Object 
 
 
 Validates that the given C<<<< $string >>>> does not match the given
@@ -750,21 +917,29 @@ Parameters:
 
 =over
 
-C<<<< $string >>>> (I<<<< String >>>>) - The string to match.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $string >>>> >>>>> -- The string to
+match.
 
 
-C<<<< $pattern >>>> (I<<<< Regex >>>>) - The regular expression to
-match against.
+=item *
+
+(I<<<< Regex >>>>) B<<<<< C<<<< $pattern >>>> >>>>> -- The regular
+expression to match against.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
 
 =item B<<<< skip >>>>
 
-    - skip($msg) # => Object 
+    skip($msg) # => Object 
 
 
 Allows the current test to be bypassed with an indeterminate status.
@@ -775,7 +950,10 @@ Parameters:
 
 =over
 
-C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- An optional
+description.
 
 
 =back
@@ -788,7 +966,7 @@ C<<<< $msg >>>> (I<<<< String >>>>) - An optional description.
 
 =item B<<<< import >>>>
 
-    + import($class) # => Object 
+    import($class) # => Object 
 
 
 Pulls all of the test-related methods into the calling package.
@@ -802,17 +980,17 @@ Pulls all of the test-related methods into the calling package.
 =item B<<<< _count_assertions >>>>
 
     # protected
-    - _count_assertions # => Object
+    _count_assertions # => Object
 
 =item B<<<< _reset_assertions >>>>
 
     # protected
-    - _reset_assertions # => Object
+    _reset_assertions # => Object
 
 =item B<<<< deref >>>>
 
     # private
-    - deref($ref) # => Object 
+    deref($ref) # => Object 
 
 
 Dereferences the given argument, if possible.
@@ -823,7 +1001,9 @@ Parameters:
 
 =over
 
-C<<<< $ref >>>> - The argument to dereference.
+=item *
+
+B<<<<< C<<<< $ref >>>> >>>>> -- The argument to dereference.
 
 
 =back
@@ -833,6 +1013,8 @@ Returns:
 
 =over
 
+=item *
+
 The referenced value or values.
 
 
@@ -841,7 +1023,7 @@ The referenced value or values.
 =item B<<<< inspect >>>>
 
     # private
-    - inspect # => String 
+    inspect # => String 
 
 
 Produce a more useful string representation of the given argument.
@@ -852,7 +1034,9 @@ Parameters:
 
 =over
 
-C<<<< $obj >>>> - The object to describe.
+=item *
+
+B<<<<< C<<<< $obj >>>> >>>>> -- The object to describe.
 
 
 =back
@@ -862,7 +1046,9 @@ Returns:
 
 =over
 
-(I<<<< String >>>>) - A description of the given object.
+=item *
+
+(I<<<< String >>>>) -- A description of the given object.
 
 
 =back
@@ -870,7 +1056,7 @@ Returns:
 =item B<<<< message >>>>
 
     # private
-    - message($default, $msg) # => Object 
+    message($default, $msg) # => Object 
 
 
 Formats error messages, appending periods and defaulting undefs as
@@ -882,12 +1068,16 @@ Parameters:
 
 =over
 
-C<<<< $default >>>> (I<<<< String >>>>) - The default message to
-use.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $default >>>> >>>>> -- The default
+message to use.
 
 
-C<<<< $msg >>>> (I<<<< String >>>>) - A message to use in place of
-the default.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $msg >>>> >>>>> -- A message to use
+in place of the default.
 
 
 =back
@@ -896,6 +1086,8 @@ the default.
 Returns:
 
 =over
+
+=item *
 
 A well-formatted message.
 

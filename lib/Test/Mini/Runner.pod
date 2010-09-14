@@ -192,7 +192,7 @@ repeatable test orderings.
 
 =item B<<<< exit_code >>>>
 
-    - exit_code($self) # => Object 
+    exit_code($self) # => Object 
 
 
 Exit code, representing the status of the test run.
@@ -203,6 +203,8 @@ Exit code, representing the status of the test run.
 Returns:
 
 =over
+
+=item *
 
 Exit code, representing the status of the test run.
 
@@ -211,7 +213,7 @@ Exit code, representing the status of the test run.
 
 =item B<<<< filter >>>>
 
-    - filter($self) # => Object 
+    filter($self) # => Object 
 
 
 Test name filter.
@@ -222,6 +224,8 @@ Test name filter.
 Returns:
 
 =over
+
+=item *
 
 Test name filter.
 
@@ -230,7 +234,7 @@ Test name filter.
 
 =item B<<<< logger >>>>
 
-    - logger($self) # => Object 
+    logger($self) # => Object 
 
 
 Logger instance.
@@ -241,6 +245,8 @@ Logger instance.
 Returns:
 
 =over
+
+=item *
 
 Logger instance.
 
@@ -249,7 +255,7 @@ Logger instance.
 
 =item B<<<< seed >>>>
 
-    - seed($self) # => Object 
+    seed($self) # => Object 
 
 
 Randomness seed.
@@ -261,6 +267,8 @@ Returns:
 
 =over
 
+=item *
+
 Randomness seed.
 
 
@@ -268,7 +276,7 @@ Randomness seed.
 
 =item B<<<< verbose >>>>
 
-    - verbose($self) # => Object 
+    verbose($self) # => Object 
 
 
 Logger verbosity.
@@ -279,6 +287,8 @@ Logger verbosity.
 Returns:
 
 =over
+
+=item *
 
 Logger verbosity.
 
@@ -293,13 +303,14 @@ Logger verbosity.
 
 =item B<<<< run >>>>
 
-    - run($self) # => Object 
+    run($self) # => Object 
 
 
 Begins the test run. Loads and instantiates the test output logger, then
-dispatches to L<<<< S<<<<< #run_test_suite >>>>> | / run_test_suite >>>>
-(passing the L<<<< S<<<<< #filter >>>>> | / filter >>>> and L<<<< S<<<<<
-#seed >>>>> | / seed >>>>, as appropriate).
+dispatches to L<<<< S<<<<< #run_test_suite >>>>> | Test::Mini::Runner /
+run_test_suite >>>> (passing the L<<<< S<<<<< #filter >>>>> |
+Test::Mini::Runner / filter >>>> and L<<<< S<<<<< #seed >>>>> |
+Test::Mini::Runner / seed >>>>, as appropriate).
 
 
 
@@ -308,15 +319,17 @@ Returns:
 
 =over
 
-The result of the L<<<< S<<<<< #run_test_suite >>>>> | /
-run_test_suite >>>> call.
+=item *
+
+The result of the L<<<< S<<<<< #run_test_suite >>>>> |
+Test::Mini::Runner / run_test_suite >>>> call.
 
 
 =back
 
 =item B<<<< run_test >>>>
 
-    - run_test($self, $tc, $test) # => Integer 
+    run_test($self, $tc, $test) # => Integer 
 
 
 Runs a specific test.
@@ -327,12 +340,16 @@ Parameters:
 
 =over
 
-C<<<< $tc >>>> (I<<<< Class >>>>) - The test case owning the test
-method.
+=item *
+
+(I<<<< Class >>>>) B<<<<< C<<<< $tc >>>> >>>>> -- The test case
+owning the test method.
 
 
-C<<<< $test >>>> (I<<<< String >>>>) - The name of the test method
-to be run.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $test >>>> >>>>> -- The name of the
+test method to be run.
 
 
 =back
@@ -342,14 +359,16 @@ Returns:
 
 =over
 
-(I<<<< Integer >>>>) - The number of assertions called by the test.
+=item *
+
+(I<<<< Integer >>>>) -- The number of assertions called by the test.
 
 
 =back
 
 =item B<<<< run_test_case >>>>
 
-    - run_test_case($self, $tc, @tests) # => Object 
+    run_test_case($self, $tc, @tests) # => Object 
 
 
 Runs tests in a test case.
@@ -360,24 +379,30 @@ Parameters:
 
 =over
 
-C<<<< $tc >>>> (I<<<< Class >>>>) - The test case to run.
+=item *
 
-
-C<<<< @tests >>>> (I<<<< Array<String> >>>>) - A list of tests to be
+(I<<<< Class >>>>) B<<<<< C<<<< $tc >>>> >>>>> -- The test case to
 run.
+
+
+=item *
+
+(I<<<< Array<String> >>>>) B<<<<< C<<<< @tests >>>> >>>>> -- A list
+of tests to be run.
 
 
 =back
 
 =item B<<<< run_test_suite >>>>
 
-    - run_test_suite($self, %args) # => Object 
+    run_test_suite($self, %args) # => Object 
 
 
 Runs the test suite. Finds subclasses of L<<<< S<<<<<
 Test::Mini::TestCase >>>>> | Test::Mini::TestCase >>>>, and dispatches
-to L<<<< S<<<<< #run_test_case >>>>> | / run_test_case >>>> with the
-name of each test case and a list test methods to be run.
+to L<<<< S<<<<< #run_test_case >>>>> | Test::Mini::Runner /
+run_test_case >>>> with the name of each test case and a list test
+methods to be run.
 
 
 
@@ -385,7 +410,9 @@ Parameters:
 
 =over
 
-C<<<< %args >>>> (I<<<< Hash >>>>) 
+=item *
+
+(I<<<< Hash >>>>) B<<<<< C<<<< %args >>>> >>>>> 
 
 
 =back
@@ -400,10 +427,14 @@ Valid Options for C<%args>:
 
 =over
 
-filter (I<<<< String >>>>) - Test name filter.
+=item *
+
+(I<<<< String >>>>) B<<<<< filter >>>>> -- Test name filter.
 
 
-seed (I<<<< String >>>>) - Randomness seed.
+=item *
+
+(I<<<< String >>>>) B<<<<< seed >>>>> -- Randomness seed.
 
 
 =back
@@ -413,7 +444,10 @@ Returns:
 
 =over
 
-The value of L<<<< S<<<<< #exit_code >>>>> | / exit_code >>>>.
+=item *
+
+The value of L<<<< S<<<<< #exit_code >>>>> | Test::Mini::Runner /
+exit_code >>>>.
 
 
 =back
@@ -426,7 +460,7 @@ The value of L<<<< S<<<<< #exit_code >>>>> | / exit_code >>>>.
 
 =item B<<<< error >>>>
 
-    - error($self, $tc, $test, $e) # => Object 
+    error($self, $tc, $test, $e) # => Object 
 
 
 Callback for dying tests.
@@ -437,23 +471,29 @@ Parameters:
 
 =over
 
-C<<<< $tc >>>> (I<<<< Class >>>>) - The test case owning the test
-method.
+=item *
+
+(I<<<< Class >>>>) B<<<<< C<<<< $tc >>>> >>>>> -- The test case
+owning the test method.
 
 
-C<<<< $test >>>> (I<<<< String >>>>) - The name of the test with an
-error.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $test >>>> >>>>> -- The name of the
+test with an error.
 
 
-C<<<< $e >>>> (I<<<< Test::Mini::Exception >>>>) - The exception
-object.
+=item *
+
+(I<<<< Test::Mini::Exception >>>>) B<<<<< C<<<< $e >>>> >>>>> -- The
+exception object.
 
 
 =back
 
 =item B<<<< fail >>>>
 
-    - fail($self, $tc, $test, $e) # => Object 
+    fail($self, $tc, $test, $e) # => Object 
 
 
 Callback for failing tests.
@@ -464,22 +504,29 @@ Parameters:
 
 =over
 
-C<<<< $tc >>>> (I<<<< Class >>>>) - The test case owning the test
-method.
+=item *
+
+(I<<<< Class >>>>) B<<<<< C<<<< $tc >>>> >>>>> -- The test case
+owning the test method.
 
 
-C<<<< $test >>>> (I<<<< String >>>>) - The name of the failed test.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $test >>>> >>>>> -- The name of the
+failed test.
 
 
-C<<<< $e >>>> (I<<<< Test::Mini::Exception::Assert >>>>) - The
-exception object.
+=item *
+
+(I<<<< Test::Mini::Exception::Assert >>>>) B<<<<< C<<<< $e >>>>
+>>>>> -- The exception object.
 
 
 =back
 
 =item B<<<< pass >>>>
 
-    - pass($self, $tc, $test) # => Object 
+    pass($self, $tc, $test) # => Object 
 
 
 Callback for passing tests.
@@ -490,18 +537,23 @@ Parameters:
 
 =over
 
-C<<<< $tc >>>> (I<<<< Class >>>>) - The test case owning the test
-method.
+=item *
+
+(I<<<< Class >>>>) B<<<<< C<<<< $tc >>>> >>>>> -- The test case
+owning the test method.
 
 
-C<<<< $test >>>> (I<<<< String >>>>) - The name of the passing test.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $test >>>> >>>>> -- The name of the
+passing test.
 
 
 =back
 
 =item B<<<< skip >>>>
 
-    - skip($self, $tc, $test, $e) # => Object 
+    skip($self, $tc, $test, $e) # => Object 
 
 
 Callback for skipped tests.
@@ -512,15 +564,22 @@ Parameters:
 
 =over
 
-C<<<< $tc >>>> (I<<<< Class >>>>) - The test case owning the test
-method.
+=item *
+
+(I<<<< Class >>>>) B<<<<< C<<<< $tc >>>> >>>>> -- The test case
+owning the test method.
 
 
-C<<<< $test >>>> (I<<<< String >>>>) - The name of the skipped test.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $test >>>> >>>>> -- The name of the
+skipped test.
 
 
-C<<<< $e >>>> (I<<<< Test::Mini::Exception::Skip >>>>) - The
-exception object.
+=item *
+
+(I<<<< Test::Mini::Exception::Skip >>>>) B<<<<< C<<<< $e >>>> >>>>>
+-- The exception object.
 
 
 =back
@@ -533,7 +592,7 @@ exception object.
 
 =item B<<<< new >>>>
 
-    + new($class, %args) # => Object 
+    new($class, %args) # => Object 
 
 
 Constructor. Arguments may be provided explicitly to the constructor or
@@ -546,8 +605,10 @@ Parameters:
 
 =over
 
-C<<<< %args >>>> (I<<<< Hash >>>>) - Initial state for the new
-instance.
+=item *
+
+(I<<<< Hash >>>>) B<<<<< C<<<< %args >>>> >>>>> -- Initial state for
+the new instance.
 
 
 =back
@@ -562,19 +623,28 @@ Valid Options for C<%args>:
 
 =over
 
-verbose - Logger verbosity.  Defaults to C<<<<< 0 >>>>>.
+=item *
+
+B<<<<< verbose >>>>> -- Logger verbosity.  Defaults to C<<<<< 0
+>>>>>.
 
 
-filter (I<<<< String >>>>) - Test name filter.  Defaults to C<<<<<
-'' >>>>>.
+=item *
+
+(I<<<< String >>>>) B<<<<< filter >>>>> -- Test name filter. 
+Defaults to C<<<<< '' >>>>>.
 
 
-logger (I<<<< Class >>>>) - Logger class name.  Defaults to C<<<<<
-Test::Mini::Logger::TAP >>>>>.
+=item *
+
+(I<<<< Class >>>>) B<<<<< logger >>>>> -- Logger class name. 
+Defaults to C<<<<< Test::Mini::Logger::TAP >>>>>.
 
 
-seed (I<<<< Integer >>>>) - Randomness seed.  Defaults to a random
-number C<<<< < 64_000_000 >>>>
+=item *
+
+(I<<<< Integer >>>>) B<<<<< seed >>>>> -- Randomness seed.  Defaults
+to a random number C<<<< < 64_000_000 >>>>
 .
 
 

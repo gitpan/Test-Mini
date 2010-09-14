@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Test-Mini
-version:            v0.6.0_2
+version:            v0.6.0_3
 abstract:           Lightweight xUnit Testing for Perl
 author:
     - Pieter van de Bruggen <pvande@cpan.org>

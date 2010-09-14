@@ -2,7 +2,7 @@
 
 =head1 NAME
 
-Test::Mini::Logger::TAP - Default {Test::Mini} Output Logger
+Test::Mini::Logger::TAP - Default Test::Mini Output Logger
 
 =head1 INHERITANCE
 
@@ -16,7 +16,7 @@ S<C<Test::Mini::Logger::TAP>> is a subclass of S<L<Test::Mini::Logger>>.
 
 =item B<<<< new >>>>
 
-    + new($class, %args) # => Object
+    new($class, %args) # => Object
 
 =back
 
@@ -26,43 +26,43 @@ S<C<Test::Mini::Logger::TAP>> is a subclass of S<L<Test::Mini::Logger>>.
 
 =item B<<<< begin_test >>>>
 
-    - begin_test($self) # => Object
+    begin_test($self) # => Object
 
 =item B<<<< begin_test_case >>>>
 
-    - begin_test_case($self, $tc, @tests) # => Object
+    begin_test_case($self, $tc, @tests) # => Object
 
 =item B<<<< diag >>>>
 
-    - diag($self, @msgs) # => Object
+    diag($self, @msgs) # => Object
 
 =item B<<<< error >>>>
 
-    - error($self, undef, $test, $msg) # => Object
+    error($self, undef, $test, $msg) # => Object
 
 =item B<<<< fail >>>>
 
-    - fail($self, undef, $test, $msg) # => Object
+    fail($self, undef, $test, $msg) # => Object
 
 =item B<<<< inc_counter >>>>
 
-    - inc_counter($self) # => Object
+    inc_counter($self) # => Object
 
 =item B<<<< pass >>>>
 
-    - pass($self, undef, $test) # => Object
+    pass($self, undef, $test) # => Object
 
 =item B<<<< reset_counter >>>>
 
-    - reset_counter($self) # => Object
+    reset_counter($self) # => Object
 
 =item B<<<< skip >>>>
 
-    - skip($self, undef, $test, $msg) # => Object
+    skip($self, undef, $test, $msg) # => Object
 
 =item B<<<< test_counter >>>>
 
-    - test_counter($self) # => Object
+    test_counter($self) # => Object
 
 =back
 

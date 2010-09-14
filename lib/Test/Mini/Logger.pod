@@ -18,7 +18,7 @@ framework, this is what you're looking for.
 
 =item B<<<< buffer >>>>
 
-    - buffer($self) # => IO 
+    buffer($self) # => IO 
 
 
 Output buffer.
@@ -30,14 +30,16 @@ Returns:
 
 =over
 
-(I<<<< IO >>>>) - Output buffer.
+=item *
+
+(I<<<< IO >>>>) -- Output buffer.
 
 
 =back
 
 =item B<<<< verbose >>>>
 
-    - verbose($self) # => Object 
+    verbose($self) # => Object 
 
 
 Logger verbosity.
@@ -48,6 +50,8 @@ Logger verbosity.
 Returns:
 
 =over
+
+=item *
 
 Logger verbosity.
 
@@ -62,11 +66,11 @@ Logger verbosity.
 
 =item B<<<< print >>>>
 
-    - print($self, @msg) # => Object 
+    print($self, @msg) # => Object 
 
 
-Write output to the L<<<< S<<<<< #buffer >>>>> | / buffer >>>>. Lines
-will be output without added newlines.
+Write output to the L<<<< S<<<<< #buffer >>>>> | Test::Mini::Logger /
+buffer >>>>. Lines will be output without added newlines.
 
 
 
@@ -74,19 +78,21 @@ Parameters:
 
 =over
 
-C<<<< @msg >>>> - The message(s) to be printed; will be handled as
-per C<<<< print >>>>.
+=item *
+
+B<<<<< C<<<< @msg >>>> >>>>> -- The message(s) to be printed; will
+be handled as per C<<<< print >>>>.
 
 
 =back
 
 =item B<<<< say >>>>
 
-    - say($self, @msg) # => Object 
+    say($self, @msg) # => Object 
 
 
-Write output to the L<<<< S<<<<< #buffer >>>>> | / buffer >>>>. Lines
-will be output with appended newlines.
+Write output to the L<<<< S<<<<< #buffer >>>>> | Test::Mini::Logger /
+buffer >>>>. Lines will be output with appended newlines.
 
 
 
@@ -94,9 +100,11 @@ Parameters:
 
 =over
 
-C<<<< @msg >>>> - The message(s) to be printed; newlines will be
-appended to each message, before being passed to L<<<< S<<<<< #print
->>>>> | / print >>>>.
+=item *
+
+B<<<<< C<<<< @msg >>>> >>>>> -- The message(s) to be printed;
+newlines will be appended to each message, before being passed to
+L<<<< S<<<<< #print >>>>> | Test::Mini::Logger / print >>>>.
 
 
 =back
@@ -109,7 +117,7 @@ appended to each message, before being passed to L<<<< S<<<<< #print
 
 =item B<<<< begin_test >>>>
 
-    - begin_test($self, $tc, $test) # => Object 
+    begin_test($self, $tc, $test) # => Object 
 
 
 Called before each test is run.
@@ -120,19 +128,23 @@ Parameters:
 
 =over
 
-C<<<< $tc >>>> (I<<<< Class >>>>) - The test case owning the test
-method.
+=item *
+
+(I<<<< Class >>>>) B<<<<< C<<<< $tc >>>> >>>>> -- The test case
+owning the test method.
 
 
-C<<<< $test >>>> (I<<<< String >>>>) - The name of the test method
-being run.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $test >>>> >>>>> -- The name of the
+test method being run.
 
 
 =back
 
 =item B<<<< begin_test_case >>>>
 
-    - begin_test_case($self, $tc, @tests) # => Object 
+    begin_test_case($self, $tc, @tests) # => Object 
 
 
 Called before each test case is run.
@@ -143,18 +155,23 @@ Parameters:
 
 =over
 
-C<<<< $tc >>>> (I<<<< Class >>>>) - The test case being run.
+=item *
+
+(I<<<< Class >>>>) B<<<<< C<<<< $tc >>>> >>>>> -- The test case
+being run.
 
 
-C<<<< @tests >>>> (I<<<< Array<String> >>>>) - A list of tests to be
-run.
+=item *
+
+(I<<<< Array<String> >>>>) B<<<<< C<<<< @tests >>>> >>>>> -- A list
+of tests to be run.
 
 
 =back
 
 =item B<<<< begin_test_suite >>>>
 
-    - begin_test_suite($self, %args) # => Object 
+    begin_test_suite($self, %args) # => Object 
 
 
 Called before the test suite is run.
@@ -165,8 +182,10 @@ Parameters:
 
 =over
 
-C<<<< %args >>>> (I<<<< Hash >>>>) - Options the test suite was run
-with.
+=item *
+
+(I<<<< Hash >>>>) B<<<<< C<<<< %args >>>> >>>>> -- Options the test
+suite was run with.
 
 
 =back
@@ -181,17 +200,21 @@ Valid Options for C<%args>:
 
 =over
 
-filter (I<<<< String >>>>) - Test name filter.
+=item *
+
+(I<<<< String >>>>) B<<<<< filter >>>>> -- Test name filter.
 
 
-seed (I<<<< String >>>>) - Randomness seed.
+=item *
+
+(I<<<< String >>>>) B<<<<< seed >>>>> -- Randomness seed.
 
 
 =back
 
 =item B<<<< error >>>>
 
-    - error($self, $tc, $test, $e) # => Object 
+    error($self, $tc, $test, $e) # => Object 
 
 
 Called when a test dies with an error. Increments the error count.
@@ -202,23 +225,29 @@ Parameters:
 
 =over
 
-C<<<< $tc >>>> (I<<<< Class >>>>) - The test case owning the test
-method.
+=item *
+
+(I<<<< Class >>>>) B<<<<< C<<<< $tc >>>> >>>>> -- The test case
+owning the test method.
 
 
-C<<<< $test >>>> (I<<<< String >>>>) - The name of the test with an
-error.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $test >>>> >>>>> -- The name of the
+test with an error.
 
 
-C<<<< $e >>>> (I<<<< Test::Mini::Exception >>>>) - The exception
-object.
+=item *
+
+(I<<<< Test::Mini::Exception >>>>) B<<<<< C<<<< $e >>>> >>>>> -- The
+exception object.
 
 
 =back
 
 =item B<<<< fail >>>>
 
-    - fail($self, $tc, $test, $e) # => Object 
+    fail($self, $tc, $test, $e) # => Object 
 
 
 Called when a test fails. Increments the failure count.
@@ -229,22 +258,29 @@ Parameters:
 
 =over
 
-C<<<< $tc >>>> (I<<<< Class >>>>) - The test case owning the test
-method.
+=item *
+
+(I<<<< Class >>>>) B<<<<< C<<<< $tc >>>> >>>>> -- The test case
+owning the test method.
 
 
-C<<<< $test >>>> (I<<<< String >>>>) - The name of the failed test.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $test >>>> >>>>> -- The name of the
+failed test.
 
 
-C<<<< $e >>>> (I<<<< Test::Mini::Exception::Assert >>>>) - The
-exception object.
+=item *
+
+(I<<<< Test::Mini::Exception::Assert >>>>) B<<<<< C<<<< $e >>>>
+>>>>> -- The exception object.
 
 
 =back
 
 =item B<<<< finish_test >>>>
 
-    - finish_test($self, $tc, $test, $assertions) # => Object 
+    finish_test($self, $tc, $test, $assertions) # => Object 
 
 
 Called after each test is run. Increments the test and assertion counts,
@@ -256,23 +292,29 @@ Parameters:
 
 =over
 
-C<<<< $tc >>>> (I<<<< Class >>>>) - The test case owning the test
-method.
+=item *
+
+(I<<<< Class >>>>) B<<<<< C<<<< $tc >>>> >>>>> -- The test case
+owning the test method.
 
 
-C<<<< $test >>>> (I<<<< String >>>>) - The name of the test method
-just run.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $test >>>> >>>>> -- The name of the
+test method just run.
 
 
-C<<<< $assertions >>>> (I<<<< Integer >>>>) - The number of
-assertions called.
+=item *
+
+(I<<<< Integer >>>>) B<<<<< C<<<< $assertions >>>> >>>>> -- The
+number of assertions called.
 
 
 =back
 
 =item B<<<< finish_test_case >>>>
 
-    - finish_test_case($self, $tc, @tests) # => Object 
+    finish_test_case($self, $tc, @tests) # => Object 
 
 
 Called after each test case is run. Increments the test case count, and
@@ -284,17 +326,23 @@ Parameters:
 
 =over
 
-C<<<< $tc >>>> (I<<<< Class >>>>) - The test case just run.
+=item *
+
+(I<<<< Class >>>>) B<<<<< C<<<< $tc >>>> >>>>> -- The test case just
+run.
 
 
-C<<<< @tests >>>> (I<<<< Array<String> >>>>) - A list of tests run.
+=item *
+
+(I<<<< Array<String> >>>>) B<<<<< C<<<< @tests >>>> >>>>> -- A list
+of tests run.
 
 
 =back
 
 =item B<<<< finish_test_suite >>>>
 
-    - finish_test_suite($self, $exit_code) # => Object 
+    finish_test_suite($self, $exit_code) # => Object 
 
 
 Called after each test suite is run. Finalizes the test suite timing.
@@ -305,15 +353,17 @@ Parameters:
 
 =over
 
-C<<<< $exit_code >>>> (I<<<< Integer >>>>) - Status the tests
-finished with.
+=item *
+
+(I<<<< Integer >>>>) B<<<<< C<<<< $exit_code >>>> >>>>> -- Status
+the tests finished with.
 
 
 =back
 
 =item B<<<< pass >>>>
 
-    - pass($self, $tc, $test) # => Object 
+    pass($self, $tc, $test) # => Object 
 
 
 Called when a test passes. Increments the pass count.
@@ -324,18 +374,23 @@ Parameters:
 
 =over
 
-C<<<< $tc >>>> (I<<<< Class >>>>) - The test case owning the test
-method.
+=item *
+
+(I<<<< Class >>>>) B<<<<< C<<<< $tc >>>> >>>>> -- The test case
+owning the test method.
 
 
-C<<<< $test >>>> (I<<<< String >>>>) - The name of the passing test.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $test >>>> >>>>> -- The name of the
+passing test.
 
 
 =back
 
 =item B<<<< skip >>>>
 
-    - skip($self, $tc, $test, $e) # => Object 
+    skip($self, $tc, $test, $e) # => Object 
 
 
 Called when a test is skipped. Increments the skip count.
@@ -346,15 +401,22 @@ Parameters:
 
 =over
 
-C<<<< $tc >>>> (I<<<< Class >>>>) - The test case owning the test
-method.
+=item *
+
+(I<<<< Class >>>>) B<<<<< C<<<< $tc >>>> >>>>> -- The test case
+owning the test method.
 
 
-C<<<< $test >>>> (I<<<< String >>>>) - The name of the skipped test.
+=item *
+
+(I<<<< String >>>>) B<<<<< C<<<< $test >>>> >>>>> -- The name of the
+skipped test.
 
 
-C<<<< $e >>>> (I<<<< Test::Mini::Exception::Skip >>>>) - The
-exception object.
+=item *
+
+(I<<<< Test::Mini::Exception::Skip >>>>) B<<<<< C<<<< $e >>>> >>>>>
+-- The exception object.
 
 
 =back
@@ -367,8 +429,8 @@ exception object.
 
 =item B<<<< count >>>>
 
-    - count # => Hash
-    - count($key) # => Number
+    count # => Hash
+    count($key) # => Number
 
 
 Accessor for counters.
@@ -378,7 +440,7 @@ Accessor for counters.
 Overloads:
 
 
-    - count # => Hash 
+    count # => Hash 
 
 =over
 
@@ -392,7 +454,9 @@ Returns:
 
 =over
 
-(I<<<< Hash >>>>) - The count hash.
+=item *
+
+(I<<<< Hash >>>>) -- The count hash.
 
 
 =back
@@ -402,7 +466,7 @@ Returns:
 
 =back
 
-    - count($key) # => Number 
+    count($key) # => Number 
 
 =over
 
@@ -415,7 +479,9 @@ Parameters:
 
 =over
 
-C<<<< $key >>>> - A key in the count hash.
+=item *
+
+B<<<<< C<<<< $key >>>> >>>>> -- A key in the count hash.
 
 
 =back
@@ -425,7 +491,9 @@ Returns:
 
 =over
 
-(I<<<< Number >>>>) - The value for the given key.
+=item *
+
+(I<<<< Number >>>>) -- The value for the given key.
 
 
 =back
@@ -437,7 +505,7 @@ Returns:
 
 =item B<<<< time >>>>
 
-    - time($self, $key) # => Number 
+    time($self, $key) # => Number 
 
 
 Accessor for the timing data.
@@ -448,23 +516,25 @@ Parameters:
 
 =over
 
-C<<<< $key >>>> - The key to look up timings for.  Typical values
-are:
+=item *
+
+B<<<<< C<<<< $key >>>> >>>>> -- The key to look up timings for. 
+Typical values are:
 
 
 =over
 
-=item C<<<< $self >>>> 
+=item B<<<<< C<<<< $self >>>>  >>>>>
 
 Time for test suite
 
 
-=item "TestCase" 
+=item B<<<<< "TestCase"  >>>>>
 
 Time for the test case
 
 
-=item "TestCase#test" 
+=item B<<<<< "TestCase#test"  >>>>>
 
 Time for the given test
 
@@ -481,7 +551,9 @@ Returns:
 
 =over
 
-(I<<<< Number >>>>) - The time taken by the given argument, in
+=item *
+
+(I<<<< Number >>>>) -- The time taken by the given argument, in
 seconds.
 
 
@@ -495,7 +567,7 @@ seconds.
 
 =item B<<<< new >>>>
 
-    + new($class, %args) # => Object 
+    new($class, %args) # => Object 
 
 
 Constructor.
@@ -506,8 +578,10 @@ Parameters:
 
 =over
 
-C<<<< %args >>>> (I<<<< Hash >>>>) - Initial state for the new
-instance.
+=item *
+
+(I<<<< Hash >>>>) B<<<<< C<<<< %args >>>> >>>>> -- Initial state for
+the new instance.
 
 
 =back
@@ -522,11 +596,16 @@ Valid Options for C<%args>:
 
 =over
 
-verbose - Logger verbosity.  Defaults to C<<<<< 0 >>>>>.
+=item *
 
-
-buffer (I<<<< IO >>>>) - Output buffer.  Defaults to C<<<<< STDOUT
+B<<<<< verbose >>>>> -- Logger verbosity.  Defaults to C<<<<< 0
 >>>>>.
+
+
+=item *
+
+(I<<<< IO >>>>) B<<<<< buffer >>>>> -- Output buffer.  Defaults to
+C<<<<< STDOUT >>>>>.
 
 
 =back
