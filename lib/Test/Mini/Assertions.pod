@@ -443,7 +443,7 @@ See Also:
 
 =item *
 
-L<<<< S<<<<< #assert_is_a >>>>>|Test::Mini::Assertions /assert_is_a >>>>
+L<<<< S<<<<< #assert_is_a >>>>>|Test::Mini::Assertions/assert_is_a >>>>
 
 
 =back
