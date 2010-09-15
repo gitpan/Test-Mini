@@ -69,8 +69,8 @@ Logger verbosity.
     print($self, @msg) # => Object 
 
 
-Write output to the L<<<< S<<<<< #buffer >>>>> | Test::Mini::Logger /
-buffer >>>>. Lines will be output without added newlines.
+Write output to the L<<<< S<<<<< #buffer >>>>>|Test::Mini::Logger
+/buffer >>>>. Lines will be output without added newlines.
 
 
 
@@ -91,8 +91,8 @@ be handled as per C<<<< print >>>>.
     say($self, @msg) # => Object 
 
 
-Write output to the L<<<< S<<<<< #buffer >>>>> | Test::Mini::Logger /
-buffer >>>>. Lines will be output with appended newlines.
+Write output to the L<<<< S<<<<< #buffer >>>>>|Test::Mini::Logger
+/buffer >>>>. Lines will be output with appended newlines.
 
 
 
@@ -104,7 +104,7 @@ Parameters:
 
 B<<<<< C<<<< @msg >>>> >>>>> -- The message(s) to be printed;
 newlines will be appended to each message, before being passed to
-L<<<< S<<<<< #print >>>>> | Test::Mini::Logger / print >>>>.
+L<<<< S<<<<< #print >>>>>|Test::Mini::Logger /print >>>>.
 
 
 =back

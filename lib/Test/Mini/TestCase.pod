@@ -119,7 +119,7 @@ See Also:
 
 =item *
 
-L<<<< S<<<<< #teardown >>>>> | Test::Mini::TestCase / teardown >>>>
+L<<<< S<<<<< #teardown >>>>>|Test::Mini::TestCase /teardown >>>>
 
 
 =back
@@ -152,7 +152,7 @@ See Also:
 
 =item *
 
-L<<<< S<<<<< #setup >>>>> | Test::Mini::TestCase / setup >>>>
+L<<<< S<<<<< #setup >>>>>|Test::Mini::TestCase /setup >>>>
 
 
 =back

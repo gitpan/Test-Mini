@@ -57,7 +57,7 @@ L<<<< S<<<<< http://blog.zenspider.com/minitest >>>>> >>>>
 
 =item *
 
-L<<<< S<<<<< Test::Mini::Runner >>>>> | Test::Mini::Runner >>>>
+L<<<< S<<<<< Test::Mini::Runner >>>>>|Test::Mini::Runner >>>>
 
 
 =back

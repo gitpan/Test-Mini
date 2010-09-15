@@ -22,9 +22,9 @@ Tests are run automatically at process exit.
 
 =item *
 
-All test cases (subclasses of L<<<< S<<<<< Test::Mini::TestCase >>>>> |
-Test::Mini::TestCase >>>>) that have been loaded at that time will be
-considered.  This includes indirect subclasses.
+All test cases (subclasses of L<<<< S<<<<< Test::Mini::TestCase
+>>>>>|Test::Mini::TestCase >>>>) that have been loaded at that time will
+be considered.  This includes indirect subclasses.
 
 
 =item *
@@ -307,10 +307,10 @@ Logger verbosity.
 
 
 Begins the test run. Loads and instantiates the test output logger, then
-dispatches to L<<<< S<<<<< #run_test_suite >>>>> | Test::Mini::Runner /
-run_test_suite >>>> (passing the L<<<< S<<<<< #filter >>>>> |
-Test::Mini::Runner / filter >>>> and L<<<< S<<<<< #seed >>>>> |
-Test::Mini::Runner / seed >>>>, as appropriate).
+dispatches to L<<<< S<<<<< #run_test_suite >>>>>|Test::Mini::Runner
+/run_test_suite >>>> (passing the L<<<< S<<<<< #filter
+>>>>>|Test::Mini::Runner /filter >>>> and L<<<< S<<<<< #seed
+>>>>>|Test::Mini::Runner /seed >>>>, as appropriate).
 
 
 
@@ -321,8 +321,8 @@ Returns:
 
 =item *
 
-The result of the L<<<< S<<<<< #run_test_suite >>>>> |
-Test::Mini::Runner / run_test_suite >>>> call.
+The result of the L<<<< S<<<<< #run_test_suite
+>>>>>|Test::Mini::Runner /run_test_suite >>>> call.
 
 
 =back
@@ -399,10 +399,9 @@ of tests to be run.
 
 
 Runs the test suite. Finds subclasses of L<<<< S<<<<<
-Test::Mini::TestCase >>>>> | Test::Mini::TestCase >>>>, and dispatches
-to L<<<< S<<<<< #run_test_case >>>>> | Test::Mini::Runner /
-run_test_case >>>> with the name of each test case and a list test
-methods to be run.
+Test::Mini::TestCase >>>>>|Test::Mini::TestCase >>>>, and dispatches to
+L<<<< S<<<<< #run_test_case >>>>>|Test::Mini::Runner /run_test_case >>>>
+with the name of each test case and a list test methods to be run.
 
 
 
@@ -446,8 +445,8 @@ Returns:
 
 =item *
 
-The value of L<<<< S<<<<< #exit_code >>>>> | Test::Mini::Runner /
-exit_code >>>>.
+The value of L<<<< S<<<<< #exit_code >>>>>|Test::Mini::Runner
+/exit_code >>>>.
 
 
 =back
@@ -596,8 +595,8 @@ skipped test.
 
 
 Constructor. Arguments may be provided explicitly to the constructor or
-implicitly via either @ARGV (parsed by L<<<< S<<<<< Getopt::Long >>>>> |
-Getopt::Long >>>>) or environment variables ("TEST_MINI_$option").
+implicitly via either @ARGV (parsed by L<<<< S<<<<< Getopt::Long
+>>>>>|Getopt::Long >>>>) or environment variables ("TEST_MINI_$option").
 
 
 

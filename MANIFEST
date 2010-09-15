@@ -4,16 +4,12 @@ lib/Test/Mini.pm
 lib/Test/Mini.pod
 lib/Test/Mini/Assertions.pm
 lib/Test/Mini/Assertions.pod
-lib/Test/Mini/Exception.pod
-lib/Test/Mini/Exception/Assert.pod
-lib/Test/Mini/Exception/Skip.pod
 lib/Test/Mini/Logger.pm
 lib/Test/Mini/Logger.pod
 lib/Test/Mini/Logger/TAP.pm
 lib/Test/Mini/Logger/TAP.pod
 lib/Test/Mini/Runner.pm
 lib/Test/Mini/Runner.pod
-lib/Test/Mini/SIGDIE.pod
 lib/Test/Mini/TestCase.pm
 lib/Test/Mini/TestCase.pod
 Makefile.PL

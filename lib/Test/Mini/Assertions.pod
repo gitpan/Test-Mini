@@ -16,7 +16,7 @@ Test::Mini::Assertions - Basic Assertions for Test::Mini
 
 
 Asserts that C<<<< $test >>>> is truthy, and throws a L<<<< S<<<<<
-Test::Mini::Exception::Assert >>>>> | Test::Mini::Exception::Assert >>>>
+Test::Mini::Exception::Assert >>>>>|Test::Mini::Exception::Assert >>>>
 if that assertion fails.
 
 
@@ -443,7 +443,7 @@ See Also:
 
 =item *
 
-L<<<< S<<<<< #assert_is_a >>>>> | Test::Mini::Assertions / assert_is_a >>>>
+L<<<< S<<<<< #assert_is_a >>>>>|Test::Mini::Assertions /assert_is_a >>>>
 
 
 =back
@@ -586,7 +586,7 @@ description.
 
 
 Asserts that C<<<< $test >>>> is falsey, and throws a L<<<< S<<<<<
-Test::Mini::Exception::Assert >>>>> | Test::Mini::Exception::Assert >>>>
+Test::Mini::Exception::Assert >>>>>|Test::Mini::Exception::Assert >>>>
 if that assertion fails.
 
 
