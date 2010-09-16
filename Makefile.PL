@@ -10,11 +10,18 @@ my $SKIP_FILES = <<SKIP;
 SKIP
 
 my %WriteMakefileArgs = (
-    'NAME'     => 'Test::Mini',
-    'ABSTRACT' => 'Lightweight xUnit Testing for Perl',
-    'VERSION'  => 'v0.6.0_5',
-    'AUTHOR'   => 'Pieter van de Bruggen <pvande@cpan.org>',
-    'LICENSE'  => 'perl',
+    'NAME'       => 'Test::Mini',
+    'ABSTRACT'   => 'Lightweight xUnit Testing for Perl',
+    'VERSION'    => 'v1.0.0',
+    'AUTHOR'     => 'Pieter van de Bruggen <pvande@cpan.org>',
+    'LICENSE'    => 'perl',
+    'META_MERGE' => {
+        'resources' => {
+            'homepage'   => 'http://github.com/pvande/Test-Mini',
+            'repository' => 'git://github.com/pvande/Test-Mini.git',
+            'bugtracker' => 'http://github.com/pvande/Test-Mini/issues',
+        },
+    },
     'PREREQ_PM' => {
         'Try::Tiny'        => '0.04',
         'Scalar::Util'     => '1.21',
@@ -40,13 +47,12 @@ my %WriteMakefileArgs = (
     },
 #   'DIST_REQUIRES' => {
 #       'ShipIt'                 => '0.55',
-#       'ShipIt::Step::Manifest' => '0.1',
 #   },
     'test' => {
         'TESTS' => 't/*.t t/*/*.t t/*/*/*.t t/*/*/*/*.t t/*/*/*/*/*.t',
     },
     'dist' => {
-        'PREOP'  => '',
+        'PREOP'  => 'RUBYLIB=:../yard-perl-plugin/lib:../yard-pod-plugin/lib yard -e yard-perl-plugin.rb -e yard-pod-plugin.rb',
         'POSTOP' => 'make realclean; rm MANIFEST',
     },
 );
@@ -58,6 +64,10 @@ delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
   unless eval { ExtUtils::MakeMaker->VERSION(6.52) };
 
 (my $DISTNAME = $WriteMakefileArgs{NAME}) =~ s/::/-/g;
+my $DISTDIR = "$DISTNAME-$WriteMakefileArgs{VERSION}";
+my $LIBDIR = "$DISTDIR/lib";
+$WriteMakefileArgs{dist}->{PREOP} .= " -o $LIBDIR; ";
+$WriteMakefileArgs{dist}->{PREOP} .= "(cd $DISTDIR; find lib -name '*.pod' -type f >> MANIFEST)";
 
 # Create a MANIFEST.SKIP file.
 open(GITIGNORE, '<.gitignore');
@@ -65,6 +75,7 @@ open(SKIP, '>MANIFEST.SKIP');
 print SKIP "#!include_default\n";
 print SKIP "MANIFEST.SKIP.*\n";
 print SKIP "^$DISTNAME.*\n";
+print SKIP "^\\..*\n";
 print SKIP <GITIGNORE>;
 print SKIP $SKIP_FILES;
 close SKIP;

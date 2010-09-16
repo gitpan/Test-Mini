@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Test-Mini
-version:            v0.6.0_5
+version:            v1.0.0
 abstract:           Lightweight xUnit Testing for Perl
 author:
     - Pieter van de Bruggen <pvande@cpan.org>
@@ -23,6 +23,10 @@ requires:
     Text::Outdent:     0.01
     Time::HiRes:       1.9719
     Try::Tiny:         0.04
+resources:
+    bugtracker:  http://github.com/pvande/Test-Mini/issues
+    homepage:    http://github.com/pvande/Test-Mini
+    repository:  git://github.com/pvande/Test-Mini.git
 no_index:
     directory:
         - t
