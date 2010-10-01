@@ -44,6 +44,10 @@ S<C<Test::Mini::Logger::TAP>> is a subclass of S<L<Test::Mini::Logger>>.
 
     fail($self, undef, $test, $msg)
 
+=item B<<<< finish_test_suite >>>>
+
+    finish_test_suite($self)
+
 =item B<<<< inc_counter >>>>
 
     inc_counter($self)
@@ -51,10 +55,6 @@ S<C<Test::Mini::Logger::TAP>> is a subclass of S<L<Test::Mini::Logger>>.
 =item B<<<< pass >>>>
 
     pass($self, undef, $test)
-
-=item B<<<< reset_counter >>>>
-
-    reset_counter($self)
 
 =item B<<<< skip >>>>
 
