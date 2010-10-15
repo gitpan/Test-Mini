@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Test-Mini
-version:            v1.1.0
+version:            v1.1.1
 abstract:           Lightweight xUnit Testing for Perl
 author:
     - Pieter van de Bruggen <pvande@cpan.org>
@@ -10,7 +10,10 @@ configure_requires:
     ExtUtils::MakeMaker:  6.31
     ExtUtils::Manifest:   1.56
 build_requires:
-    ExtUtils::MakeMaker:  0
+    aliased:     0.30
+    B:           0
+    IO::Scalar:  2.110
+    Test::More:  0.96
 requires:
     Data::Inspect:     0.03
     Exception::Class:  1.30
@@ -31,7 +34,7 @@ no_index:
     directory:
         - t
         - inc
-generated_by:       ExtUtils::MakeMaker version 6.55_02
+generated_by:       ExtUtils::MakeMaker version 6.56
 meta-spec:
     url:      http://module-build.sourceforge.net/META-spec-v1.4.html
     version:  1.4
