@@ -131,6 +131,9 @@ sub refute ($;$) {
 
 # Asserts that the given code reference returns a truthy value.
 #
+# @deprecated This assertion offers little advantage over the base {#assert}.
+#   This will be removed in v2.0.0.
+#
 # @example
 #   assert_block { 'true' };
 # @example
@@ -140,6 +143,7 @@ sub refute ($;$) {
 # @param [String] $msg An optional description.
 sub assert_block (&;$) {
     my ($block, $msg) = @_;
+    warn '#assert_block is deprecated; please use #assert instead.';
     ($msg, $block) = ($block, $msg) if $msg && ref $block ne 'CODE';
     $msg = message('Expected block to return true value', $msg);
     assert_instance_of($block, 'CODE');
@@ -147,6 +151,9 @@ sub assert_block (&;$) {
 }
 
 # Asserts that the given code reference returns a falsey value.
+#
+# @deprecated This assertion offers little advantage over the base {#refute}.
+#   This will be removed in v2.0.0.
 #
 # @example
 #   refute_block { '' };
@@ -157,6 +164,7 @@ sub assert_block (&;$) {
 # @param [String] $msg An optional description.
 sub refute_block (&;$) {
     my ($block, $msg) = @_;
+    warn '#refute_block is deprecated; please use #refute instead.';
     ($msg, $block) = ($block, $msg) if $msg && ref $block ne 'CODE';
     $msg = message('Expected block to return false value', $msg);
     assert_instance_of($block, 'CODE');

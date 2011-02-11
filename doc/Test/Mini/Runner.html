@@ -1,0 +1,1867 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Class: Test::Mini::Runner</title>
+<link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (R)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../../Test.html" title="Test (module)">Test</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Mini.html" title="Test::Mini (class)">Mini</a></span></span>
+     &raquo; 
+    <span class="title">Runner</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Test::Mini::Runner
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Test::Mini::Runner</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/Test/Mini/Runner.pm</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+Default Test Runner.
+</p>
+<p>
+The Test::Mini::Runner is responsible for finding and running the
+appropriate tests, setting up output logging, and returning an appropriate
+status code.  For those looking to write tests with this framework, the
+points of note are as follows:
+</p>
+<ul>
+<li><p>
+Tests are run automatically at process exit.
+</p>
+</li>
+<li><p>
+All test cases (subclasses of <span class='object_link'><a href="TestCase.html" title="Test::Mini::TestCase (class)">TestCase</a></span>) that have been loaded
+at that time will be considered.  This includes indirect subclasses.
+</p>
+</li>
+<li><p>
+Within each test case, all methods defined with a name matching
+<tt>/^test.+/</tt> will be run.
+</p>
+<ul>
+<li><p>
+Each test will run in its own test case instance.
+</p>
+</li>
+</ul>
+<ul>
+<li><p>
+Tests will be run in random order.
+</p>
+</li>
+</ul>
+<ul>
+<li><p>
+#setup will be called before each test is run.
+</p>
+</li>
+</ul>
+<ul>
+<li><p>
+#teardown will be called after each test is run.
+</p>
+</li>
+</ul>
+<ul>
+<li><p>
+Inherited tests are <b>not</b> run.
+</p>
+</li>
+</ul>
+</li>
+<li><p>
+Tests may be run via <tt>`prove`</tt>, by loading (via <tt>use</tt>, <tt>do</tt>
+or <tt>require</tt>) the files into another script, or by simply executing
+a file containing a test case in the Perl interpreter.
+</p>
+<ul>
+<li><p>
+If you want to use a non-TAP output logger, <tt>`prove`</tt> is not an option.
+</p>
+</li>
+</ul>
+</li>
+<li><p>
+Options may be passed in either as command line options, or as environment
+variables.
+</p>
+<ul>
+<li><p>
+Environment variable names are prefixed with &#8216;TEST_MINI_&#8217;.
+</p>
+</li>
+</ul>
+<ul>
+<li><p>
+Valid options are:
+</p>
+<ul>
+<li><p>
+<tt>verbose</tt> - Specifies the logger&#8217;s verbosity.
+</p>
+</li>
+</ul>
+<ul>
+<li><p>
+<tt>filter</tt> - Only tests with names matching this pattern should be
+run.
+</p>
+</li>
+</ul>
+<ul>
+<li><p>
+<tt>logger</tt> - Specifies an alternate output logger class.
+</p>
+</li>
+</ul>
+<ul>
+<li><p>
+<tt>seed</tt> - Specifies a random number seed; used to specify repeatable
+test orderings.
+</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+
+
+  
+    <h2>
+      Attribute Accessors
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#exit_code-instance_method" title="#exit_code (instance method)">- <strong>exit_code</strong>($self) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Exit code, representing the status of the test run.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#filter-instance_method" title="#filter (instance method)">- <strong>filter</strong>($self) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Test name filter.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#logger-instance_method" title="#logger (instance method)">- <strong>logger</strong>($self) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Logger instance.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#seed-instance_method" title="#seed (instance method)">- <strong>seed</strong>($self) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Randomness seed.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#verbose-instance_method" title="#verbose (instance method)">- <strong>verbose</strong>($self) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Logger verbosity.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Test Run Hooks
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#run-instance_method" title="#run (instance method)">- <strong>run</strong>($self) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Begins the test run.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#run_test-instance_method" title="#run_test (instance method)">- (Integer) <strong>run_test</strong>($self, $tc, $test) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Runs a specific test.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#run_test_case-instance_method" title="#run_test_case (instance method)">- <strong>run_test_case</strong>($self, $tc, @tests) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Runs tests in a test case.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#run_test_suite-instance_method" title="#run_test_suite (instance method)">- <strong>run_test_suite</strong>($self, %args) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Runs the test suite.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Callbacks
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#error-instance_method" title="#error (instance method)">- <strong>error</strong>($self, $tc, $test, $e) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Callback for dying tests.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fail-instance_method" title="#fail (instance method)">- <strong>fail</strong>($self, $tc, $test, $e) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Callback for failing tests.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pass-instance_method" title="#pass (instance method)">- <strong>pass</strong>($self, $tc, $test) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Callback for passing tests.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#skip-instance_method" title="#skip (instance method)">- <strong>skip</strong>($self, $tc, $test, $e) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Callback for skipped tests.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-class_method" title="new (class method)">+ <strong>new</strong>($class, %args) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Constructor.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="new-class_method">
+  
+    + <strong>new</strong>($class, %args) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Constructor. Arguments may be provided explicitly to the constructor or
+implicitly via either @ARGV (parsed by Getopt::Long) or environment
+variables (&#8220;TEST_MINI_$option&#8221;).
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <span class='name'>%args</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Initial state for the new instance.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    <h3>Options Hash (<tt>%args</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="type">(<tt>Object</tt>)</span>
+          <span class="name">verbose</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>0</tt>
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Logger verbosity.
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="name">filter</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>''</tt>
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Test name filter.
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>Class</tt>)</span>
+          <span class="name">logger</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>Test::Mini::Logger::TAP</tt>
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Logger class name.
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="name">seed</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>a random number +&lt; 64_000_000+</tt>
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Randomness seed.
+</p>
+</div>
+        </tr>
+      
+    </ul>
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/Test/Mini/Runner.pm', line 52</span>
+
+<span class="kw">sub</span> <span class="val">new</span> {
+    <span class="kw">my</span> (<span class="ivar">$class</span>, <span class="ivar">%args</span>) = <span class="ivar">@_</span>;
+
+    <span class="kw">my</span> <span class="ivar">%argv</span> = (
+        <span class="symbol">verbose   </span>=> <span class="ivar">$ENV</span>{<span class="symbol">TEST_MINI_VERBOSE</span>} || 0,
+        <span class="symbol">filter    </span>=> <span class="ivar">$ENV</span>{<span class="symbol">TEST_MINI_FILTER</span>}  || <span class="tstring">''</span>,
+        <span class="symbol">logger    </span>=> <span class="ivar">$ENV</span>{<span class="symbol">TEST_MINI_LOGGER</span>}  || <span class="tstring">'Test::Mini::Logger::TAP'</span>,
+        <span class="symbol">seed      </span>=> <span class="ivar">$ENV</span>{<span class="symbol">TEST_MINI_SEED</span>}    || <span class="kw">int</span>(<span class="kw">rand</span>(64_000_000)),
+    );
+
+    GetOptions(\<span class="ivar">%argv</span>, <span class="tstring">qw/ verbose=s filter=s logger=s seed=i /</span>);
+    <span class="kw">return</span> <span class="kw">bless</span> { <span class="ivar">%argv</span>, <span class="ivar">%args</span>, <span class="symbol">exit_code </span>=> 0 }, <span class="ivar">$class</span>;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="error-instance_method">
+  
+    - <strong>error</strong>($self, $tc, $test, $e) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Callback for dying tests.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+        <span class='name'>$tc</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The test case owning the test method.
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <span class='name'>$test</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The name of the test with an error.
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Exception.html" title="Test::Mini::Exception (class)">Test::Mini::Exception</a></span></tt>)</span>
+      
+      
+        <span class='name'>$e</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The exception object.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+226
+227
+228
+229
+230</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/Test/Mini/Runner.pm', line 226</span>
+
+<span class="kw">sub</span> <span class="val">error</span> {
+    <span class="kw">my</span> (<span class="ivar">$self</span>, <span class="ivar">$tc</span>, <span class="ivar">$test</span>, <span class="ivar">$e</span>) = <span class="ivar">@_</span>;
+    <span class="ivar">$self</span><span class="kw">-></span>{<span class="symbol">exit_code</span>} = 1 <span class="kw">unless</span> <span class="ivar">$self</span><span class="kw">-></span>{<span class="symbol">exit_code</span>};
+    <span class="ivar">$self</span><span class="kw">-></span>logger<span class="kw">-></span>error(<span class="ivar">$tc</span>, <span class="ivar">$test</span>, <span class="ivar">$e</span>);
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="exit_code-instance_method">
+  
+    - <strong>exit_code</strong>($self) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Exit code, representing the status of the test run.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Exit code, representing the status of the test run.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+93
+94
+95
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/Test/Mini/Runner.pm', line 93</span>
+
+<span class="kw">sub</span> <span class="val">exit_code</span> {
+    <span class="kw">my</span> <span class="ivar">$self</span> = <span class="kw">shift</span>;
+    <span class="kw">return</span> <span class="ivar">$self</span><span class="kw">-></span>{<span class="symbol">exit_code</span>};
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="fail-instance_method">
+  
+    - <strong>fail</strong>($self, $tc, $test, $e) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Callback for failing tests.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+        <span class='name'>$tc</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The test case owning the test method.
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <span class='name'>$test</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The name of the failed test.
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Exception/Assert.html" title="Test::Mini::Exception::Assert (class)">Test::Mini::Exception::Assert</a></span></tt>)</span>
+      
+      
+        <span class='name'>$e</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The exception object.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+215
+216
+217
+218
+219</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/Test/Mini/Runner.pm', line 215</span>
+
+<span class="kw">sub</span> <span class="val">fail</span> {
+    <span class="kw">my</span> (<span class="ivar">$self</span>, <span class="ivar">$tc</span>, <span class="ivar">$test</span>, <span class="ivar">$e</span>) = <span class="ivar">@_</span>;
+    <span class="ivar">$self</span><span class="kw">-></span>{<span class="symbol">exit_code</span>} = 1 <span class="kw">unless</span> <span class="ivar">$self</span><span class="kw">-></span>{<span class="symbol">exit_code</span>};
+    <span class="ivar">$self</span><span class="kw">-></span>logger<span class="kw">-></span>fail(<span class="ivar">$tc</span>, <span class="ivar">$test</span>, <span class="ivar">$e</span>);
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="filter-instance_method">
+  
+    - <strong>filter</strong>($self) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Test name filter.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Test name filter.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+75
+76
+77
+78</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/Test/Mini/Runner.pm', line 75</span>
+
+<span class="kw">sub</span> <span class="val">filter</span> {
+    <span class="kw">my</span> <span class="ivar">$self</span> = <span class="kw">shift</span>;
+    <span class="kw">return</span> <span class="ivar">$self</span><span class="kw">-></span>{<span class="symbol">filter</span>};
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="logger-instance_method">
+  
+    - <strong>logger</strong>($self) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Logger instance.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Logger instance.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+81
+82
+83
+84</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/Test/Mini/Runner.pm', line 81</span>
+
+<span class="kw">sub</span> <span class="val">logger</span> {
+    <span class="kw">my</span> <span class="ivar">$self</span> = <span class="kw">shift</span>;
+    <span class="kw">return</span> <span class="ivar">$self</span><span class="kw">-></span>{<span class="symbol">logger</span>};
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="pass-instance_method">
+  
+    - <strong>pass</strong>($self, $tc, $test) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Callback for passing tests.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+        <span class='name'>$tc</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The test case owning the test method.
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <span class='name'>$test</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The name of the passing test.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+195
+196
+197
+198</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/Test/Mini/Runner.pm', line 195</span>
+
+<span class="kw">sub</span> <span class="val">pass</span> {
+    <span class="kw">my</span> (<span class="ivar">$self</span>, <span class="ivar">$tc</span>, <span class="ivar">$test</span>) = <span class="ivar">@_</span>;
+    <span class="ivar">$self</span><span class="kw">-></span>logger<span class="kw">-></span>pass(<span class="ivar">$tc</span>, <span class="ivar">$test</span>);
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="run-instance_method">
+  
+    - <strong>run</strong>($self) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Begins the test run. Loads and instantiates the test output logger, then
+dispatches to <span class='object_link'><a href="#run_test_suite-instance_method" title="Test::Mini::Runner#run_test_suite (method)">#run_test_suite</a></span> (passing the <span class='object_link'><a href="#filter-instance_method" title="Test::Mini::Runner#filter (method)">#filter</a></span> and <span class='object_link'><a href="#seed-instance_method" title="Test::Mini::Runner#seed (method)">#seed</a></span>, as
+appropriate).
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+The result of the <span class='object_link'><a href="#run_test_suite-instance_method" title="Test::Mini::Runner#run_test_suite (method)">#run_test_suite</a></span> call.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/Test/Mini/Runner.pm', line 105</span>
+
+<span class="kw">sub</span> <span class="val">run</span> {
+    <span class="kw">my</span> (<span class="ivar">$self</span>) = <span class="ivar">@_</span>;
+    <span class="kw">my</span> <span class="ivar">$logger</span> = <span class="ivar">$self</span><span class="kw">-></span>logger;
+    try {
+        <span class="kw">eval</span> <span class="tstring">"require <span class="ivar">$logger</span>;"</span> <span class="kw">or</span> <span class="kw">die</span> <span class="ivar">$@</span>;
+    }
+    catch {
+        <span class="kw">eval</span> <span class="tstring">"require Test::Mini::Logger::<span class="ivar">$logger</span>;"</span> <span class="kw">or</span> <span class="kw">die</span> <span class="ivar">$@</span>;
+    };
+
+    <span class="ivar">$logger</span> = <span class="ivar">$logger</span><span class="kw">-></span>new(<span class="symbol">verbose </span>=> <span class="ivar">$self</span><span class="kw">-></span>verbose);
+    <span class="ivar">$self</span><span class="kw">-></span>{<span class="symbol">logger</span>} = <span class="ivar">$logger</span>;
+
+    <span class="kw">return</span> <span class="ivar">$self</span><span class="kw">-></span>run_test_suite(<span class="symbol">filter </span>=> <span class="ivar">$self</span><span class="kw">-></span>filter, <span class="symbol">seed </span>=> <span class="ivar">$self</span><span class="kw">-></span>seed);
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="run_test-instance_method">
+  
+    - (<tt>Integer</tt>) <strong>run_test</strong>($self, $tc, $test) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Runs a specific test.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+        <span class='name'>$tc</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The test case owning the test method.
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <span class='name'>$test</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The name of the test method to be run.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The number of assertions called by the test.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/Test/Mini/Runner.pm', line 178</span>
+
+<span class="kw">sub</span> <span class="val">run_test</span> {
+    <span class="kw">my</span> (<span class="ivar">$self</span>, <span class="ivar">$tc</span>, <span class="ivar">$test</span>) = <span class="ivar">@_</span>;
+    <span class="ivar">$self</span><span class="kw">-></span>logger<span class="kw">-></span>begin_test(<span class="ivar">$tc</span>, <span class="ivar">$test</span>);
+
+    <span class="kw">my</span> <span class="ivar">$instance</span> = <span class="ivar">$tc</span><span class="kw">-></span>new(<span class="symbol">name </span>=> <span class="ivar">$test</span>);
+    <span class="kw">my</span> <span class="ivar">$assertions</span> = <span class="ivar">$instance</span><span class="kw">-></span>run(<span class="ivar">$self</span>);
+
+    <span class="ivar">$self</span><span class="kw">-></span>logger<span class="kw">-></span>finish_test(<span class="ivar">$tc</span>, <span class="ivar">$test</span>, <span class="ivar">$assertions</span>);
+    <span class="kw">return</span> <span class="ivar">$assertions</span>;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="run_test_case-instance_method">
+  
+    - <strong>run_test_case</strong>($self, $tc, @tests) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Runs tests in a test case.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+        <span class='name'>$tc</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The test case to run.
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+        <span class='name'>@tests</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+A list of tests to be run.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/Test/Mini/Runner.pm', line 159</span>
+
+<span class="kw">sub</span> <span class="val">run_test_case</span> {
+    <span class="kw">my</span> (<span class="ivar">$self</span>, <span class="ivar">$tc</span>, <span class="ivar">@tests</span>) = <span class="ivar">@_</span>;
+    <span class="ivar">$self</span><span class="kw">-></span>logger<span class="kw">-></span>begin_test_case(<span class="ivar">$tc</span>, <span class="ivar">@tests</span>);
+
+    <span class="ivar">$self</span><span class="kw">-></span>{<span class="symbol">exit_code</span>} = 127 <span class="kw">unless</span> @{[
+        (<span class="ivar">@tests</span>, <span class="kw">grep</span> { <span class="ivar">$_</span><span class="kw">-></span>isa(<span class="ivar">$tc</span>) } @{ mro::get_isarev(<span class="ivar">$tc</span>) })
+    ]};
+
+    <span class="ivar">$self</span><span class="kw">-></span>run_test(<span class="ivar">$tc</span>, <span class="ivar">$_</span>) <span class="kw">for</span> shuffle <span class="ivar">@tests</span>;
+
+    <span class="ivar">$self</span><span class="kw">-></span>logger<span class="kw">-></span>finish_test_case(<span class="ivar">$tc</span>, <span class="ivar">@tests</span>);
+    <span class="kw">return</span> <span class="kw">scalar</span> <span class="ivar">@tests</span>;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="run_test_suite-instance_method">
+  
+    - <strong>run_test_suite</strong>($self, %args) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Runs the test suite. Finds subclasses of <span class='object_link'><a href="TestCase.html" title="Test::Mini::TestCase (class)">TestCase</a></span>, and
+dispatches to <span class='object_link'><a href="#run_test_case-instance_method" title="Test::Mini::Runner#run_test_case (method)">#run_test_case</a></span> with the name of each test case and a list
+test methods to be run.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <span class='name'>%args</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    <h3>Options Hash (<tt>%args</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="name">filter</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Test name filter.
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="name">seed</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Randomness seed.
+</p>
+</div>
+        </tr>
+      
+    </ul>
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+The value of <span class='object_link'><a href="#exit_code-instance_method" title="Test::Mini::Runner#exit_code (method)">#exit_code</a></span>.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/Test/Mini/Runner.pm', line 130</span>
+
+<span class="kw">sub</span> <span class="val">run_test_suite</span> {
+    <span class="kw">my</span> (<span class="ivar">$self</span>, <span class="ivar">%args</span>) = <span class="ivar">@_</span>;
+    <span class="ivar">$self</span><span class="kw">-></span>logger<span class="kw">-></span>begin_test_suite(<span class="ivar">%args</span>);
+
+    <span class="kw">srand</span>(<span class="ivar">$args</span>{<span class="symbol">seed</span>});
+    <span class="kw">my</span> <span class="ivar">@testcases</span> = @{ mro::get_isarev(<span class="tstring">'Test::Mini::TestCase'</span>) };
+
+    <span class="comment"># Since mro::get_isarev is guaranteed to never shrink, we should "double</span>
+    <span class="comment"># check" our testcases, to make sure that they actually are *still*</span>
+    <span class="comment"># subclasses of Test::Mini::TestCase.</span>
+    <span class="comment"># @see http://search.cpan.org/dist/perl-5.12.2/ext/mro/mro.pm#mro::get_isarev($classname)</span>
+    <span class="ivar">@testcases</span> = <span class="kw">grep</span> { <span class="ivar">$_</span><span class="kw">-></span>isa(<span class="tstring">'Test::Mini::TestCase'</span>) } <span class="ivar">@testcases</span>;
+
+    <span class="ivar">$self</span><span class="kw">-></span>{<span class="symbol">exit_code</span>} = 255 <span class="kw">unless</span> <span class="ivar">@testcases</span>;
+
+    <span class="kw">for</span> <span class="kw">my</span> <span class="ivar">$tc</span> (shuffle <span class="ivar">@testcases</span>) {
+        <span class="kw">no</span> strict <span class="tstring">'refs'</span>;
+        <span class="kw">my</span> <span class="ivar">@tests</span> = <span class="kw">grep</span> { <span class="regexp">/^test.+/</span> && <span class="kw">defined</span> &{<span class="tstring">"<span class="ivar">$tc</span><span class="const">\:</span>:<span class="ivar">$_</span>"</span>}} <span class="kw">keys</span> %{<span class="tstring">"<span class="ivar">$tc</span><span class="const">\:</span>:"</span>};
+        <span class="ivar">$self</span><span class="kw">-></span>run_test_case(<span class="ivar">$tc</span>, <span class="kw">grep</span> { <span class="ivar">$_</span> =~ <span class="regexp"><span class="kw">qr</span>/<span class="ivar">$args</span>{filter}/</span> } <span class="ivar">@tests</span>);
+    }
+
+    <span class="ivar">$self</span><span class="kw">-></span>logger<span class="kw">-></span>finish_test_suite(<span class="ivar">$self</span><span class="kw">-></span>exit_code);
+    <span class="kw">return</span> <span class="ivar">$self</span><span class="kw">-></span>exit_code;
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="seed-instance_method">
+  
+    - <strong>seed</strong>($self) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Randomness seed.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Randomness seed.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+87
+88
+89
+90</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/Test/Mini/Runner.pm', line 87</span>
+
+<span class="kw">sub</span> <span class="val">seed</span> {
+    <span class="kw">my</span> <span class="ivar">$self</span> = <span class="kw">shift</span>;
+    <span class="kw">return</span> <span class="ivar">$self</span><span class="kw">-></span>{<span class="symbol">seed</span>};
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="skip-instance_method">
+  
+    - <strong>skip</strong>($self, $tc, $test, $e) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Callback for skipped tests.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+        <span class='name'>$tc</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The test case owning the test method.
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <span class='name'>$test</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The name of the skipped test.
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Exception/Skip.html" title="Test::Mini::Exception::Skip (class)">Test::Mini::Exception::Skip</a></span></tt>)</span>
+      
+      
+        <span class='name'>$e</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The exception object.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+205
+206
+207
+208</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/Test/Mini/Runner.pm', line 205</span>
+
+<span class="kw">sub</span> <span class="val">skip</span> {
+    <span class="kw">my</span> (<span class="ivar">$self</span>, <span class="ivar">$tc</span>, <span class="ivar">$test</span>, <span class="ivar">$e</span>) = <span class="ivar">@_</span>;
+    <span class="ivar">$self</span><span class="kw">-></span>logger<span class="kw">-></span>skip(<span class="ivar">$tc</span>, <span class="ivar">$test</span>, <span class="ivar">$e</span>);
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="verbose-instance_method">
+  
+    - <strong>verbose</strong>($self) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Logger verbosity.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Logger verbosity.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+69
+70
+71
+72</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/Test/Mini/Runner.pm', line 69</span>
+
+<span class="kw">sub</span> <span class="val">verbose</span> {
+    <span class="kw">my</span> <span class="ivar">$self</span> = <span class="kw">shift</span>;
+    <span class="kw">return</span> <span class="ivar">$self</span><span class="kw">-></span>{<span class="symbol">verbose</span>};
+}</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Thu Feb 10 23:19:20 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.4 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>
